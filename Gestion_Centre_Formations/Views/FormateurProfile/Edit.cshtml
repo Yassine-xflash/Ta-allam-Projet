@@ -1,0 +1,52 @@
+﻿@model Gestion_Centre_Formations.Models.Formation
+
+@{
+    ViewBag.Title = "Modifier une formation";
+}
+
+<div class="container my-5">
+    <h2>Modifier la formation</h2>
+    <hr />
+    @using (Html.BeginForm("Edit", "FormateurProfile", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.FormationID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Titre, "Titre")
+            @Html.TextBoxFor(model => model.Titre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Titre, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "Description")
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Categorie, "Catégorie")
+            @Html.TextBoxFor(model => model.Categorie, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Categorie, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, "Durée (en heures)")
+            @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number", min = "1" })
+            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prix, "Prix (€)")
+            @Html.TextBoxFor(model => model.Prix, new { @class = "form-control", type = "number", step = "0.01", min = "0" })
+            @Html.ValidationMessageFor(model => model.Prix, "", new { @class = "text-danger" })
+        </div>
+
+        @* Hidden field to ensure the FormateurID remains the same *@
+        @Html.HiddenFor(model => model.FormateurID)
+
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        <a href="@Url.Action("Index", "FormateurProfile")" class="btn btn-secondary">Annuler</a>
+    }
+</div>
+

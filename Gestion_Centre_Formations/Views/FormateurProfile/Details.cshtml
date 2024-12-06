@@ -1,0 +1,62 @@
+﻿@model Gestion_Centre_Formations.Models.FormateurFormationDetailsViewModel
+
+@{
+    ViewBag.Title = "Détails de la Formation";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Formation Details Section -->
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-primary">@Model.Formation.Titre</h3>
+                    <p class="card-text text-muted">@Model.Formation.Description</p>
+                    <p><strong>Catégorie:</strong> @Model.Formation.Categorie</p>
+                    <p><strong>Durée:</strong> @Model.Formation.Duration heures</p>
+                    <p><strong>Prix par participant:</strong> @Model.Formation.Prix €</p>
+                    <p><strong>Total des participants:</strong> @Model.Formation.FormationParticipants.Count</p>
+                    <hr />
+                    <h5>Total des recettes: @Model.TotalPrice €</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Participants Section -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Participants inscrits</h5>
+                    @if (Model.Formation.FormationParticipants.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var participant in Model.Formation.FormationParticipants)
+                            {
+                                <li class="list-group-item">
+                                    @if (participant.Participant != null)
+                                    {
+                                        <strong>
+                                            @(participant.Participant.Nom ?? "No Name")
+                                            @(participant.Participant.Prenom ?? "No First Name")
+                                        </strong>
+                                        <br />
+                                        <span class="text-muted">@participant.Participant.Email</span>
+                                    }
+                                    else
+                                    {
+                                        <strong>Participant information not available</strong>
+                                    }
+                                </li>
+                            }
+
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>Aucun participant inscrit pour cette formation.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

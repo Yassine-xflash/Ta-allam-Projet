@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/fontawesome.css">
+    <link rel="stylesheet" href="~/Content/base.css">
+    <link rel="stylesheet" href="~/Content/owl.css">
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+</head>
+<body>
+    @*<div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>*@
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <a href="@Url.Action("Index", "Home")" class="logo">
+                            <h1>Taʿallam</h1>
+                        </a>
+                        <div class="search-input">
+                            <form id="search" action="#">
+                                <input type="text" placeholder="Type Something" id="searchText" name="searchKeyword" onkeypress="handle" />
+                                <i class="fa fa-search"></i>
+                            </form>
+                        </div>
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="@Url.Action("Index", "Home")" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="@Url.Action("Index", "APropos")" class="active">À propos</a></li>
+                            @if (Session["UserType"] == null)
+                            {
+                                <li class="scroll-to-section">
+                                    <a href="@Url.Action("LogIn", "Authentification")" class="active">Profile</a>
+                                </li>
+                            }
+                            else if (Session["UserType"].ToString() == "Formateur")
+                            {
+                                <li class="scroll-to-section">
+                                    <a href="@Url.Action("Index", "FormateurProfile")" class="active">Profile</a>
+                                </li>
+                            }
+                            else if (Session["UserType"].ToString() == "Participant")
+                            {
+                                <li class="scroll-to-section">
+                                    <a href="@Url.Action("Index", "ParticipantProfile")" class="active">Profile</a>
+                                </li>
+                            }
+
+                            @if (Session["UserId"] == null)
+                            {
+                                <li class="scroll-to-section">
+                                    <a href="@Url.Action("Login", "Authentification")" class="active">Log In</a>
+                                </li>
+                                <li class="scroll-to-section">
+                                    <a href="@Url.Action("SignUp", "Authentification")" class="active">Sign Up</a>
+                                </li>
+                            }
+                            else
+                            {
+                                var userName = Session["Nom"].ToString();
+                                var userPrenom = Session["Prenom"].ToString();
+                                var initials = userName.Substring(0, 1).ToUpper() + userPrenom.Substring(0, 1).ToUpper();
+                                <li class="scroll-to-section dropdown">
+                                    <a href="#" class="active dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <div class="rounded-circle bg-primary-soft text-dark-bluee d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 16px;">
+                                            @initials
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="userDropdown">
+                                        <li>
+                                            <a href="@Url.Action("Profile", "User")" class="dropdown-item">
+                                                <i class="bi bi-person me-2"></i>Account
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="@Url.Action("Logout", "Authentification")">
+                                                <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>Copyright &copy; @DateTime.Now.Year - Taʿallam Projet</p>
+    </footer>
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/isotope.min.js"></script>
+    <script src="~/Scripts/owl-carousel.js"></script>
+    <script src="~/Scripts/counter.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+
+</body>
+</html>

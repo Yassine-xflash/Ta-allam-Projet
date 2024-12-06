@@ -1,0 +1,69 @@
+﻿<div class="container my-5">
+    <div class="row">
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold text-primary">@Model.Formateur.Nom @Model.Formateur.Prenom</h5>
+                    <p class="card-text text-muted">@Model.Formateur.Specialisation</p>
+                    <hr />
+                    <p class="card-text">
+                        <i class="bi bi-person-workspace"></i> Formateur Profil
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formations Section -->
+        <div class="col-md-8">
+            <h2 class="mb-4">Formations créées</h2>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                @foreach (var formation in Model.Formations)
+                {
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-success fw-bold">@formation.Titre</h5>
+                                <p class="card-text text-muted small">@formation.Description</p>
+                                <p class="card-text"><span class="fw-semibold">Catégorie:</span> @formation.Categorie</p>
+                                <p class="card-text"><span class="fw-semibold">Durée:</span> @formation.Duration heures</p>
+                                <p class="card-text"><span class="fw-semibold">Prix:</span> @formation.Prix €</p>
+
+                                <div class="mt-auto">
+                                    <a href="@Url.Action("Details", "FormateurProfile", new { formationId = formation.FormationID })"
+                                       class="btn btn-primary"
+                                       onclick="sessionStorage.setItem('FormationId', @formation.FormationID)">
+                                        Afficher les détails <i class="bi bi-eye"></i>
+                                    </a>
+
+
+
+
+                                    <a href="@Url.Action("Edit", new { id = formation.FormationID })" class="btn btn-secondary btn-sm me-2">
+                                        <i class="bi bi-pencil"></i> Modifier
+                                    </a>
+
+                                    <form action="@Url.Action("Delete", new { id = formation.FormationID })" method="post"
+                                          class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ? Cette action est irréversible.')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Create Formation Button -->
+            <div class="text-end mt-4">
+                <a href="@Url.Action("Create", "FormateurProfile")" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Créer une nouvelle formation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
