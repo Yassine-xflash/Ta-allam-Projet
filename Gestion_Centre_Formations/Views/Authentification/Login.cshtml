@@ -1,100 +1,115 @@
 ﻿@model Gestion_Centre_Formations.Models.LogInModel
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+}
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow-lg border-0 rounded-lg">
-                <div class="card-header bg-gradient-primary text-center py-4">
-                    <h3 class="text-white">User Login</h3>
-                </div>
-                <div class="card-body">
-                    @using (Html.BeginForm("Login", "Authentification", FormMethod.Post, new { id = "loginForm" }))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        if (TempData["SuccessMessage"] != null)
-                        {
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                @TempData["SuccessMessage"]
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        }
-
-                        <!-- Display error messages -->
-                        if (!ViewData.ModelState.IsValid)
-                        {
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                                {
-                                    <p>@error.ErrorMessage</p>
-                                }
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        }
-
-                        <div class="mb-3 row">
-                            <label for="Email" class="col-sm-4 col-form-label">Email Address</label>
-                            <div class="col-sm-8">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <label for="Password" class="col-sm-4 col-form-label">Password</label>
-                            <div class="col-sm-8">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter your password" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Log In
-                            </button>
-                        </div>
-                    }
-                </div>
-                <div class="card-footer text-center py-3">
-                    <p class="text-muted mb-2">Don't have an account?</p>
-                    <a href="@Url.Action("SignUp", "Authentification")" class="btn btn-outline-secondary btn-sm">
-                        <i class="bi bi-person-plus me-2"></i>Register
-                    </a>
-                </div>
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Se Connecter</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="@Url.Action("Index", "Home")">Accueil</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Se Connecter</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
 </div>
+<!-- Header End -->
+<!-- Login Form Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Se Connecter</h6>
+            <h1 class="mb-5">Connectez-Vous</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 wow fadeInUp" data-wow-delay="0.5s">
+                @using (Html.BeginForm("Login", "Authentification", FormMethod.Post, new { id = "loginForm", @class = "bg-light p-5 rounded shadow" }))
+                {
+                    @Html.AntiForgeryToken()
 
-<style>
-    .bg-gradient-primary {
-        background: linear-gradient(to right, #0D6EFD 0%, #4792ff 100%);
-    }
+                    if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
 
-    .card {
-        transform: translateY(0);
-        transition: transform 0.3s ease-in-out;
-    }
+                    <!-- Display error messages -->
+                    if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <p>@error.ErrorMessage</p>
+                            }
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
 
-    .form-control {
-        border-radius: 1.25rem;
-        box-shadow: none;
-        border: 1px solid #d1d3e2;
-        font-size: 1rem;
-    }
+                    <div class="mb-3 row">
+                        <label for="Email" class="col-sm-4 col-form-label">Email Address</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-    .form-control:focus {
-        border-color: #4e73df;
-        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
-    }
+                    <div class="mb-3 row">
+                        <label for="Password" class="col-sm-4 col-form-label">Password</label>
+                        <div class="col-sm-8">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter your password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-    .col-form-label {
-        font-weight: bold;
-        color: #4e73df;
-    }
-</style>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Log In
+                        </button>
+                    </div>
+                    <div class="col-12 text-center">
+                        <p class="mb-0">Don't have an account? <a href="@Url.Action("SignUp", "Authentification")" class="text-primary">Sign Up</a></p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Form End -->
 
-<!-- Bootstrap CSS and Icons (if not already included in the layout) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+@*<style>
+        .bg-gradient-primary {
+            background: linear-gradient(to right, #0D6EFD 0%, #4792ff 100%);
+        }
+
+        .card {
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .form-control {
+            border-radius: 1.25rem;
+            box-shadow: none;
+            border: 1px solid #d1d3e2;
+            font-size: 1rem;
+        }
+
+            .form-control:focus {
+                border-color: #4e73df;
+                box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+            }
+
+        .col-form-label {
+            font-weight: bold;
+            color: #4e73df;
+        }
+    </style>*@

@@ -5,338 +5,111 @@
     ViewBag.Title = "A propos";
 }
 
-<div class="about-page">
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Bienvenue sur notre application de gestion de centre de formation</h1>
-            <p class="hero-subtitle">Notre plateforme vous permet de gérer simplement vos formations, formateurs et participants.</p>
-        </div>
-    </div>
-
-    <!-- About Section -->
-    <div class="section about-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-1">
-                    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Where shall we begin?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    Dolor <strong>almesit amet</strong>, consectetur adipiscing elit, sed doesn't eiusmod tempor incididunt ut labore consectetur <code>adipiscing</code> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    How do we work together?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    Dolor <strong>almesit amet</strong>, consectetur adipiscing elit, sed doesn't eiusmod tempor incididunt ut labore consectetur <code>adipiscing</code> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Why SCHOLAR is the best?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    There are more than one hundred responsive HTML templates to choose from <strong>Template</strong>Mo website. You can browse by different tags or categories.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    Do we get the best support?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    You can also search on Google with specific keywords such as <code>templatemo business templates, templatemo gallery templates, admin dashboard templatemo, 3-column templatemo, etc.</code>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 align-self-center">
-                    <div class="section-heading">
-                        <h6>About Us</h6>
-                        <h2>What make us the best academy online?</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravid risus commodo.</p>
-                        <div class="main-button">
-                            <a href="#">Discover More</a>
-                        </div>
-                    </div>
-                </div>
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">À propos de nous</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="home.php">Accueil</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="contact.php">Contact</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">À propos</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </div>
-
-    <!-- About Section -->
-    <div class="container">
-        <section class="about-section">
-            <h2 class="section-title">À propos de notre centre</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Notre centre de formation a pour mission de proposer des formations de qualité dans les domaines du développement, du marketing et du management. Nous travaillons en étroite collaboration avec des experts reconnus dans leur domaine afin d'offrir à nos participants une expérience d'apprentissage enrichissante et adaptée à leurs besoins.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Statistics Section -->
-        <section class="stats-section">
-            <h2 class="section-title">Nos statistiques</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <div class="stat-number" id="formationsCount">@Model.FormationsCount</div>
-                        <div class="stat-label">Formations disponibles</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-number" id="participantsCount">@Model.ParticipantsCount</div>
-                        <div class="stat-label">Participants inscrits</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-number" id="avgRating">@Model.AverageRating</div>
-                        <div class="stat-label">Note moyenne des formations</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Popular Courses Section -->
-        <section class="courses-section">
-            <h2 class="section-title">Nos formations les plus populaires</h2>
-            <div class="row">
-                @foreach (var formation in Model.PopularFormations)
-                {
-                    <div class="col-md-4">
-                        <div class="course-card">
-                            <div class="course-image">
-                                <div class="category-badge">Formation</div>
-                            </div>
-                            <div class="course-content">
-                                <h3 class="course-title">@formation.Titre</h3>
-                                <p class="course-description">@formation.Description</p>
-                                <a href="#" class="course-button">En savoir plus</a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </section>
     </div>
 </div>
+<!-- Header End -->
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                        <h5 class="mb-3">Formateurs qualifiés</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                        <h5 class="mb-3">Cours en ligne</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                        <h5 class="mb-3">Projets à domicile</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                        <h5 class="mb-3">Bibliothèque de livres</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="../assets/img/about.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start text-primary pe-3">À propos de nous</h6>
+                <h1 class="mb-4">Bienvenue sur eLEARNING</h1>
+                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Formateurs qualifiés</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Cours en ligne</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Certificat international</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Formateurs qualifiés</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Cours en ligne</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Certificat international</p>
+                    </div>
+                </div>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
 
-<style>
-    /* Base Styles */
-    .about-page {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
-        line-height: 1.6;
-    }
 
-    /* Hero Section */
-    .hero-section {
-        background: linear-gradient(135deg, 
-        0%, #8878e9 100%);
-        padding: 100px 0 80px;
-        color: white;
-        position: relative;
-        overflow: hidden;
-    }
 
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            right: -20%;
-            width: 80%;
-            height: 120%;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: rotate(-15deg);
-        }
-
-    .hero-title {
-        font-size: 2.8rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-        opacity: 0.9;
-        max-width: 800px;
-    }
-
-    /* Section Styles */
-    .section-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin: 3rem 0 2rem;
-        color: #2c3e50;
-        position: relative;
-        padding-bottom: 1rem;
-    }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: #0d6efd;
-        }
-
-    /* Statistics Cards */
-    .stats-section {
-        padding: 40px 0;
-    }
-
-    .stat-card {
-        background: white;
-        border-radius: 15px;
-        padding: 2rem;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        margin-bottom: 30px;
-    }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-    .stat-icon {
-        font-size: 2.5rem;
-        color: #0d6efd;
-        margin-bottom: 1rem;
-    }
-
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-        color: #666;
-        font-size: 1.1rem;
-    }
-
-    /* Course Cards */
-    .course-card {
-        background: white;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-        transition: transform 0.3s ease;
-    }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-        }
-
-    .course-image {
-        height: 200px;
-        background: linear-gradient(45deg, #0d6efd, #8878e9);
-        position: relative;
-    }
-
-    .category-badge {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        color: #0d6efd;
-    }
-
-    .course-content {
-        padding: 1.5rem;
-    }
-
-    .course-title {
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: #2c3e50;
-        margin-bottom: 1rem;
-    }
-
-    .course-description {
-        color: #666;
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
-    }
-
-    .course-button {
-        display: inline-block;
-        padding: 0.8rem 1.5rem;
-        background: #0d6efd;
-        color: white;
-        text-decoration: none;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-    }
-
-        .course-button:hover {
-            background: #6557c6;
-            transform: translateY(-2px);
-            color: white;
-            text-decoration: none;
-        }
-
-    /* Responsive Adjustments */
-    @@media (max-width: 768px) {
-        .hero-section {
-            padding: 60px 0 40px;
-        }
-
-        .hero-title {
-            font-size: 2rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1rem;
-        }
-
-        .stat-card {
-            margin-bottom: 20px;
-        }
-    }
-</style>
 
 <!-- Add Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

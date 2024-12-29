@@ -3,122 +3,247 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Site.css">
     <link rel="stylesheet" href="~/Content/fontawesome.css">
     <link rel="stylesheet" href="~/Content/base.css">
     <link rel="stylesheet" href="~/Content/owl.css">
     <link rel="stylesheet" href="~/Content/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+    <!-- Favicon -->
+    <link href="~/assets/img/favicon.ico" rel="icon">
+
+
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/assets/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
 </head>
 <body>
-    @*<div id="js-preloader" class="js-preloader">
-        <div class="preloader-inner">
-            <span class="dot"></span>
-            <div class="dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>*@
-    <header class="header-area header-sticky">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <a href="@Url.Action("Index", "Home")" class="logo">
-                            <h1>Taʿallam</h1>
-                        </a>
-                        <div class="search-input">
-                            <form id="search" action="#">
-                                <input type="text" placeholder="Type Something" id="searchText" name="searchKeyword" onkeypress="handle" />
-                                <i class="fa fa-search"></i>
-                            </form>
-                        </div>
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="@Url.Action("Index", "Home")" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="@Url.Action("Index", "APropos")" class="active">À propos</a></li>
-                            @if (Session["UserType"] == null)
-                            {
-                                <li class="scroll-to-section">
-                                    <a href="@Url.Action("LogIn", "Authentification")" class="active">Profile</a>
-                                </li>
-                            }
-                            else if (Session["UserType"].ToString() == "Formateur")
-                            {
-                                <li class="scroll-to-section">
-                                    <a href="@Url.Action("Index", "FormateurProfile")" class="active">Profile</a>
-                                </li>
-                            }
-                            else if (Session["UserType"].ToString() == "Participant")
-                            {
-                                <li class="scroll-to-section">
-                                    <a href="@Url.Action("Index", "ParticipantProfile")" class="active">Profile</a>
-                                </li>
-                            }
+            <!-- Logo -->
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand d-flex align-items-center">
+                <h2 class="m-0 text-primary"><i class="fa fa-feather me-3"></i>Taʿallam</h2>
+            </a>
 
-                            @if (Session["UserId"] == null)
-                            {
-                                <li class="scroll-to-section">
-                                    <a href="@Url.Action("Login", "Authentification")" class="active">Log In</a>
-                                </li>
-                                <li class="scroll-to-section">
-                                    <a href="@Url.Action("SignUp", "Authentification")" class="active">Sign Up</a>
-                                </li>
-                            }
-                            else
-                            {
-                                var userName = Session["Nom"].ToString();
-                                var userPrenom = Session["Prenom"].ToString();
-                                var initials = userName.Substring(0, 1).ToUpper() + userPrenom.Substring(0, 1).ToUpper();
-                                <li class="scroll-to-section dropdown">
-                                    <a href="#" class="active dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <div class="rounded-circle bg-primary-soft text-dark-bluee d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 16px;">
-                                            @initials
-                                        </div>
+            <!-- Search Input -->
+            <div class="search-input me-4">
+                <form id="search" action="#">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-0" placeholder="Type Something" id="searchText" name="searchKeyword" onkeypress="handle" />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Navbar Toggler Button -->
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <!-- Home Link -->
+                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Home</a>
+
+                    <!-- À propos Link -->
+                    <a href="@Url.Action("Index", "APropos")" class="nav-item nav-link">About</a>
+
+                    <a href="@Url.Action("Index", "Formations")" class="nav-item nav-link">Courses</a>
+
+                    <!-- Conditional Profile Link -->
+                    @if (Session["UserType"] != null)
+                    {
+                        if (Session["UserType"].ToString() == "Formateur")
+                        {
+                            <a href="@Url.Action("Index", "FormateurProfile")" class="nav-item nav-link">Profile</a>
+                        }
+                        else if (Session["UserType"].ToString() == "Participant")
+                        {
+                            <a href="@Url.Action("Index", "ParticipantProfile")" class="nav-item nav-link">Profile</a>
+                        }
+                        else if (Session["UserType"].ToString() == "Admin")
+                        {
+                            <a href="@Url.Action("Index", "AdminProfile")" class="nav-item nav-link">Profile</a>
+                        }
+                    }
+
+                    <!-- Conditional Login/Signup Links -->
+                    @if (Session["UserId"] == null)
+                    {
+                        <a href="@Url.Action("Login", "Authentification")" class="nav-item nav-link">Log In</a>
+                        <a href="@Url.Action("SignUp", "Authentification")" class="nav-item nav-link">Sign Up</a>
+                    }
+                    else
+                    {
+                        <!-- User Dropdown -->
+                        var userName = Session["Nom"].ToString();
+                        var userPrenom = Session["Prenom"].ToString();
+                        var initials = userName.Substring(0, 1).ToUpper() + userPrenom.Substring(0, 1).ToUpper();
+                        <!-- User Dropdown -->
+                        <li class="nav-item dropdown ms-3">
+                            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="rounded-circle bg-primary-soft text-dark-bluee d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 16px;">
+                                    @initials
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="userDropdown">
+                                <li>
+                                    <a href="@Url.Action("Profile", "User")" class="dropdown-item">
+                                        <i class="bi bi-person me-2"></i>Account
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="userDropdown">
-                                        <li>
-                                            <a href="@Url.Action("Profile", "User")" class="dropdown-item">
-                                                <i class="bi bi-person me-2"></i>Account
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="@Url.Action("Logout", "Authentification")">
-                                                <i class="bi bi-box-arrow-right me-2"></i>Logout
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-                            }
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                    </nav>
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Logout", "Authentification")">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
                 </div>
             </div>
         </div>
-    </header>
-
-
+    </nav>
     @RenderBody()
     <hr />
-    <footer>
-        <p>Copyright &copy; @DateTime.Now.Year - Taʿallam Projet</p>
-    </footer>
+    <div class="container-fluid bg-primary text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">@DateTime.Now.Year - Taʿallam Projet</a>, All Right Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Home</a>
+                            <a href="">Cookies</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        /* Search Input Styling */
+        .search-input .input-group {
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .search-input .form-control {
+            border: none;
+            padding: 8px 15px;
+            font-size: 14px;
+            background-color: transparent;
+        }
+
+        .search-input .btn-primary {
+            background-color: #06BBCC;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 0 25px 25px 0;
+            color: #fff;
+        }
+
+            .search-input .btn-primary:hover {
+                background-color: #06BBCC;
+            }
+        /* User Dropdown Styling */
+        .nav-item.dropdown {
+            display: flex;
+            align-items: center;
+        }
+
+            .nav-item.dropdown .nav-link {
+                padding: 0;
+            }
+
+            .nav-item.dropdown .rounded-circle {
+                background-color: #f0f0f0;
+                color: #06BBCC;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+                .nav-item.dropdown .rounded-circle:hover {
+                    background-color: #06BBCC;
+                    color: #fff;
+                }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+        }
+
+        .dropdown-item {
+            color: #333;
+            font-size: 14px;
+            padding: 8px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+            .dropdown-item:hover {
+                background-color: #f8f9fa;
+                color: #06BBCC;
+            }
+
+            .dropdown-item i {
+                margin-right: 10px;
+            }
+    </style>
 
 
-    <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="~/Scripts/isotope.min.js"></script>
     <script src="~/Scripts/owl-carousel.js"></script>
     <script src="~/Scripts/counter.js"></script>
     <script src="~/Scripts/custom.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="~/assets/lib/wow/wow.min.js"></script>
+    <script src="~/assets/lib/easing/easing.min.js"></script>
+    <script src="~/assets/lib/waypoints/waypoints.min.js"></script>
 
+    <!-- Template Custom JavaScript -->
+    <script src="~/assets/js/main.js"></script>
 </body>
 </html>
+
+

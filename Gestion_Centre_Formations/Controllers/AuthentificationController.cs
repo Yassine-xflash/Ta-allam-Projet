@@ -122,7 +122,6 @@ namespace Gestion_Centre_Formations.Controllers
                     }
                     else if (formateur != null)
                     {
-                        // Set session for formateur
                         Session["UserId"] = formateur.FormateurID;
                         Session["UserType"] = "Formateur";
                         Session["Nom"] = formateur.Nom;
@@ -131,7 +130,6 @@ namespace Gestion_Centre_Formations.Controllers
                     }
                     else if (admin != null)
                     {
-                        // Set session for formateur
                         Session["UserId"] = admin.AdminID;
                         Session["UserType"] = "Admin";
                         Session["Nom"] = admin.Nom;
@@ -161,7 +159,7 @@ namespace Gestion_Centre_Formations.Controllers
             return RedirectToAction("Login");
         }
 
-
+        
 
 
         // Password Hashing Method
@@ -175,9 +173,14 @@ namespace Gestion_Centre_Formations.Controllers
                 {
                     builder.Append(bytes[i].ToString("x2"));
                 }
+                Console.WriteLine("123456");
                 return builder.ToString();
             }
+            
         }
+
+        
+
 
     }
 }

@@ -95,6 +95,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\img\about.jpg" />
+    <Content Include="assets\img\carousel-1.jpg" />
+    <Content Include="assets\img\carousel-2.jpg" />
+    <Content Include="assets\img\cat-1.jpg" />
+    <Content Include="assets\img\cat-2.jpg" />
+    <Content Include="assets\img\cat-3.jpg" />
+    <Content Include="assets\img\cat-4.jpg" />
+    <Content Include="assets\img\course-1.jpg" />
+    <Content Include="assets\img\course-2.jpg" />
+    <Content Include="assets\img\course-3.jpg" />
+    <Content Include="assets\img\team-1.jpg" />
+    <Content Include="assets\img\team-2.jpg" />
+    <Content Include="assets\img\team-3.jpg" />
+    <Content Include="assets\img\team-4.jpg" />
+    <Content Include="assets\img\testimonial-1.jpg" />
+    <Content Include="assets\img\testimonial-2.jpg" />
+    <Content Include="assets\img\testimonial-3.jpg" />
+    <Content Include="assets\img\testimonial-4.jpg" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\script.js" />
+    <Content Include="assets\lib\animate\animate.css" />
+    <Content Include="assets\lib\animate\animate.min.css" />
+    <Content Include="assets\lib\easing\easing.js" />
+    <Content Include="assets\lib\easing\easing.min.js" />
+    <Content Include="assets\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="assets\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="assets\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="assets\lib\waypoints\waypoints.min.js" />
+    <Content Include="assets\lib\wow\wow.js" />
+    <Content Include="assets\lib\wow\wow.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -129,6 +168,7 @@
     <Content Include="wwwroot\images\banner-item-01.jpg" />
     <Content Include="wwwroot\images\banner-item-02.jpg" />
     <Content Include="wwwroot\images\banner-item-03.jpg" />
+    <Content Include="wwwroot\images\banner.jpg" />
     <Content Include="wwwroot\images\contact-dec-01.png" />
     <Content Include="wwwroot\images\contact-dec-02.png" />
     <Content Include="wwwroot\images\course-01.jpg" />
@@ -214,6 +254,8 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="assets\lib\owlcarousel\LICENSE" />
+    <Content Include="assets\lib\waypoints\links.php" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -231,6 +273,13 @@
     <Content Include="Views\FormateurProfile\Create.cshtml" />
     <Content Include="Views\FormateurProfile\Edit.cshtml" />
     <Content Include="Views\FormateurProfile\Details.cshtml" />
+    <Content Include="Views\Authentification\AddAdminManually.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Admins\Details.cshtml" />
+    <Content Include="Views\Admins\Create.cshtml" />
+    <Content Include="Views\Admins\Edit.cshtml" />
+    <Content Include="Views\Admins\Delete.cshtml" />
+    <Content Include="Views\Formations\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -250,10 +299,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admins\" />
     <Folder Include="Views\Formateurs\" />
     <Folder Include="Views\FormationParticipants\" />
-    <Folder Include="Views\Formations\" />
     <Folder Include="Views\Participants\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Test\" />
