@@ -1,0 +1,152 @@
+﻿@model Gestion_Centre_Formations.Models.FormationsPage
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Add New Course";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-inn-sp admin-form">
+            <div class="sb2-2-add-blog sb2-2-1">
+                <h2>Add New Course</h2>
+                <ul class="nav nav-tabs tab-list tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#home" aria-expanded="true"><i class="fa fa-info" aria-hidden="true"></i> <span>Detail</span></a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#menu2" aria-expanded="false"><i class="fa fa-picture-o" aria-hidden="true"></i> <span>Course Image</span></a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade active in">
+                        <div class="box-inn-sp">
+                            <div class="inn-title">
+                                <h4>Course Information</h4>
+                            </div>
+                            <div class="bor">
+                                @using (Html.BeginForm("CreateFormation", "Admins", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <!-- Course Name -->
+                                    <div>
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            @Html.TextBoxFor(model => model.Titre, new { @class = "validate", id = "list-title" })
+                                            @Html.ValidationMessageFor(model => model.Titre, "", new { @class = "text-danger" })
+                                            <label for="list-title">Course Name</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Category -->
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            @Html.TextBoxFor(model => model.Categorie, new { @class = "validate", id = "list-name" })
+                                            @Html.ValidationMessageFor(model => model.Categorie, "", new { @class = "text-danger" })
+                                            <label for="list-name">Category</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Course Description -->
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "materialize-textarea" })
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                            <label>Course Description</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Formateur Dropdown -->
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            @Html.DropDownListFor(model => model.FormateurID, (SelectList)ViewBag.Formateurs, "Select Formateur", new { @class = "validate" })
+                                            @Html.ValidationMessageFor(model => model.FormateurID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Prix -->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    @Html.TextBoxFor(model => model.Prix, new { @type = "number", @class = "validate", id = "list-prix" })
+                                    @Html.ValidationMessageFor(model => model.Prix, "", new { @class = "text-danger" })
+                                    <label for="list-prix">Prix</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    @Html.TextBoxFor(model => model.Duration, new { @type = "number", @class = "validate", id = "list-Duration" })
+                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                    <label for="list-Duration">Duration</label>
+                                </div>
+                            </div>
+
+                                    <!-- File Upload -->
+                                    <div class="row">
+                                        <div class="file-field input-field col s12">
+                                            <div class="btn admin-upload-btn">
+                                                <span>File</span>
+                                                @Html.TextBoxFor(model => model.ImageFile, new { type = "file", id = "ImageFile" })
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text" placeholder="Upload course banner image">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div class="inn-title">
+                            <h4>Photo Gallery</h4>
+                        </div>
+                        <div class="bor">
+                            <p>Upload the course banner image using the file upload field above.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded");
+
+    // Initialize Materialize select
+    var selectElems = document.querySelectorAll('select');
+    if (selectElems.length > 0) {
+        M.FormSelect.init(selectElems);
+    } else {
+        console.error("No <select> elements found.");
+    }
+
+    // Initialize Materialize textareas
+    var textareaElems = document.querySelectorAll('textarea');
+    if (textareaElems.length > 0) {
+        M.updateTextFields();
+    } else {
+        console.error("No <textarea> elements found.");
+    }
+
+    // Initialize tabs
+    var tabElems = document.querySelectorAll('.tabs');
+    if (tabElems.length > 0) {
+        M.Tabs.init(tabElems);
+    } else {
+        console.error("No .tabs elements found.");
+    }
+});
+
+</script>

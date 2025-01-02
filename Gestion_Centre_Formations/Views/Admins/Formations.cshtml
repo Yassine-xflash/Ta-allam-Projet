@@ -1,0 +1,66 @@
+﻿@model Gestion_Centre_Formations.Models.FormationsPage
+
+@{
+    ViewBag.Title = "Formations";
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+}
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Course Details</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Category</th>
+                                    <th>Durations</th>
+                                    <th>Prix</th>
+                                    <th>Total Students</th>
+                                    <th>Status</th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var formation in Model.Formations)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="admin-student-details.html">
+                                                <span class="list-enq-name">@formation.Titre</span>
+                                                <span class="list-enq-city">@formation.Description</span>
+                                            </a>
+                                        </td>
+                                        <td>@formation.Categorie</td>
+                                        <td>@formation.Duration</td>
+                                        <td>@formation.Prix</td>
+                                        <td>@(formation.FormationParticipants != null ? formation.FormationParticipants.Count : 0)</td>
+                                        <td>
+                                            <span class="label label-success">Active</span>
+                                        </td>
+                                        <td>
+                                            <a href="admin-student-details.html" class="ad-st-view">View</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("EditFormation", "Admins", new { id = formation.FormationID })" class="ad-st-view">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteFormation", "Admins", new { id = formation.FormationID })" class="ad-st-view" onclick="return confirm('Are you sure you want to delete this formation?');">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

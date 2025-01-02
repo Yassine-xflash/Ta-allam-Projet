@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title - TA'ALLAM</title>
+    <!-- META TAGS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content=""> <!-- Corrected from 'keyword' to 'keywords' -->
+    <!-- FAV ICON(BROWSER TAB ICON) -->
+    <link rel="shortcut icon" href="~/assets/img/icon.png" type="image/x-icon">
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
+    <!-- FONTAWESOME ICONS -->
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <!-- ALL CSS FILES -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet">
+    <link href="~/assets/css/materialize.css" rel="stylesheet">
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="~/assets/css/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/fontawesome.css">
+    <link href="~/assets/css/admin-mob.css" rel="stylesheet">
+</head>
+<body>
+    <!--== MAIN CONTAINER ==-->
+    <div class="container-fluid sb1">
+        <div class="row">
+            <!--== LOGO ==-->
+            <div class="col-md-2 col-sm-3 col-xs-6 sb1-1">
+                <a href="#" class="btn-close-menu"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <a href="#" class="atab-menu"><i class="fa fa-bars tab-menu" aria-hidden="true"></i></a>
+                <a href="index-2.html" class="logo">
+                    <img src="~/assets/images/logo1.png" alt="TA'ALLAM Logo">
+                </a>
+            </div>
+            <!--== SEARCH ==-->
+            <div class="col-md-6 col-sm-6 mob-hide">
+                <form class="app-search">
+                    <input type="text" placeholder="Search..." class="form-control">
+                    <a href="#"><i class="fa fa-search"></i></a>
+                </form>
+            </div>
+            <!--== NOTIFICATION ==-->
+            <div class="col-md-2 tab-hide">
+                <div class="top-not-cen">
+                    <a class='waves-effect btn-noti' href="admin-all-enquiry.html" title="all enquiry messages"><i class="fa fa-commenting-o" aria-hidden="true"></i><span>5</span></a>
+                    <a class='waves-effect btn-noti' href="admin-course-enquiry.html" title="course booking messages"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>5</span></a>
+                    <a class='waves-effect btn-noti' href="admin-admission-enquiry.html" title="admission enquiry"><i class="fa fa-tag" aria-hidden="true"></i><span>5</span></a>
+                </div>
+            </div>
+            <!--== MY ACCOUNT ==-->
+            <div class="col-md-2 col-sm-3 col-xs-6">
+                <!-- Dropdown Trigger -->
+                <a class='waves-effect dropdown-button top-user-pro' href='#' data-activates='top-menu'>
+                    <img src="~/assets/images/user/6.png" alt="User Profile">My Account <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+
+                <!-- Dropdown Structure -->
+                <ul id='top-menu' class='dropdown-content top-menu-sty'>
+                    <li>
+                        <a href="admin-panel-setting.html" class="waves-effect"><i class="fa fa-cogs" aria-hidden="true"></i>Admin Setting</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#" class="ho-dr-con-last waves-effect"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--== BODY CONTAINER ==-->
+    <div class="container-fluid sb2">
+        <div class="row">
+            <div class="sb2-1">
+                <!--== USER INFO ==-->
+                <div class="sb2-12">
+                    <ul>
+                        <li>
+                            <img src="~/assets/images/placeholder.jpg" alt="User Placeholder">
+                        </li>
+                        <li>
+                            <h5>
+                                @{
+                                    var userName = Session["Nom"]?.ToString();
+                                    var userPrenom = Session["Prenom"]?.ToString();
+                                    @(userPrenom + " " + userName)
+                                }
+                            </h5>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <!--== LEFT MENU ==-->
+                <div class="sb2-13">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <a href="@Url.Action("Index", "Admins")" class="menu-active"><i class="fa fa-bar-chart" aria-hidden="true"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-user" aria-hidden="true"></i> Users</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="@Url.Action("Users", "Admins")">All Users</a></li>
+                                    <li><a href="@Url.Action("CreateUser", "Admins")">Add New user</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-book" aria-hidden="true"></i> All Courses</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="@Url.Action("Formations", "Admins")">All Course</a></li>
+                                    <li><a href="@Url.Action("CreateFormation", "Admins")">Add New Course</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a href="admin-slider.html"><i class="fa fa-image" aria-hidden="true"></i> Slider</a>
+                        </li>
+                        <li>
+                            <a href="admin-quick-link.html"><i class="fa fa-external-link-square" aria-hidden="true"></i> Slider quick link</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-calendar" aria-hidden="true"></i> Events</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-event-all.html">All Events</a></li>
+                                    <li><a href="admin-event-add.html">Create New Events</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-bullhorn" aria-hidden="true"></i> Seminar</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-seminar-all.html">All Seminar</a></li>
+                                    <li><a href="admin-seminar-add.html">Create New Seminar</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Job Vacants</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-job-all.html">All Jobs</a></li>
+                                    <li><a href="admin-job-add.html">Create New Job</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> Exam time table</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-exam-all.html">All Exams</a></li>
+                                    <li><a href="admin-exam-add.html">Add New Exam</a></li>
+                                    <li><a href="admin-exam-group-all.html">All Groups</a></li>
+                                    <li><a href="admin-exam-group-add.html">Create New Groups</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-users" aria-hidden="true"></i> Students</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-user-all.html">All Students</a></li>
+                                    <li><a href="admin-user-add.html">Add New Students</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-commenting-o" aria-hidden="true"></i> Enquiry</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-all-enquiry.html">All Enquiry</a></li>
+                                    <li><a href="admin-course-enquiry.html">Course Enquiry</a></li>
+                                    <li><a href="admin-admission-enquiry.html">Admission Enquiry</a></li>
+                                    <li><a href="admin-seminar-enquiry.html">Seminar Enquiry</a></li>
+                                    <li><a href="admin-event-enquiry.html">Event Enquiry</a></li>
+                                    <li><a href="admin-common-enquiry.html">Common Enquiry</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-cloud-download" aria-hidden="true"></i> Import & Export</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a href="admin-export-data.html">Export all datas</a></li>
+                                    <li><a href="admin-import-data.html">Import all datas</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--== BODY INNER CONTAINER ==-->
+            <div class="sb2-2">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!--Import jQuery before materialize.js-->
+    <script src="~/assets/js/admain.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/materialize.min.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>

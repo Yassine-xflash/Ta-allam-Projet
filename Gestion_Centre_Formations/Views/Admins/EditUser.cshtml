@@ -1,0 +1,115 @@
+﻿@model Gestion_Centre_Formations.Models.AdminPage
+
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Edit User";
+}
+
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#"> Edit User</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Users", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+
+<!--== User Details ==-->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="inn-title">
+                    <h4>Edit User Informations</h4>
+                </div>
+                <div class="tab-inn">
+                    @using (Html.BeginForm("EditUser", "Admins", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.UserType)
+
+                        <div class="row">
+                            <div class="input-field col s6">
+                                @Html.TextBoxFor(model => model.Nom, new { @class = "validate", required = "required" })
+                                <label for="Nom">Nom</label>
+                            </div>
+                            <div class="input-field col s6">
+                                @Html.TextBoxFor(model => model.Prenom, new { @class = "validate", required = "required" })
+                                <label for="Prenom">Prenom</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                @Html.TextBoxFor(model => model.NumTel, new { @type = "number", @class = "validate", required = "required" })
+                                <label for="NumTel">Phone number</label>
+                            </div>
+                            <div class="input-field col s6">
+                                @Html.TextBoxFor(model => model.Email, new { @type = "email", @class = "validate", required = "required" })
+                                <label for="Email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                @Html.PasswordFor(model => model.Password, new { @class = "validate" })
+                                <label for="Password">Password</label>
+                            </div>
+                            <div class="input-field col s6">
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "validate" })
+                                <label for="ConfirmPassword">Confirm Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                @Html.DropDownListFor(model => model.UserType, new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Formateur", Value = "Formateur" },
+                                    new SelectListItem { Text = "Participant", Value = "Participant" }
+                                }, new { @id = "typeSelect", @class = "validate" })
+                                <label for="UserType">User Type</label>
+                            </div>
+                            <div class="input-field col s6" id="specialisationField" style="@(Model.UserType == "Formateur" ? "" : "display:none;")">
+                                @Html.TextBoxFor(model => model.Specialisation, new { @id = "specialisationInput", @class = "validate" })
+                                <label for="Specialisation">Specialisation</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button type="submit" class="waves-effect waves-light btn-large">Save Changes</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var typeSelect = document.getElementById('typeSelect');
+        var specialisationField = document.getElementById('specialisationField');
+
+        if (typeSelect && specialisationField) {
+            // Set initial visibility based on the current UserType
+            if (typeSelect.value === 'Formateur') {
+                specialisationField.style.display = 'block';
+            } else {
+                specialisationField.style.display = 'none';
+            }
+
+            // Add event listener for changes
+            typeSelect.addEventListener('change', function() {
+                if (this.value === 'Formateur') {
+                    specialisationField.style.display = 'block';
+                } else {
+                    specialisationField.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>

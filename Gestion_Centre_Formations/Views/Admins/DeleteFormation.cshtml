@@ -1,0 +1,35 @@
+﻿@model Gestion_Centre_Formations.Models.Formation
+
+@{
+    ViewBag.Title = "Delete Formation";
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+}
+
+<h2>Delete Formation</h2>
+
+<h3>Are you sure you want to delete this formation?</h3>
+<div>
+    <h4>Formation Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Titre</dt>
+        <dd>@Model.Titre</dd>
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+        <dt>Categorie</dt>
+        <dd>@Model.Categorie</dd>
+        <dt>Duration</dt>
+        <dd>@Model.Duration</dd>
+        <dt>Prix</dt>
+        <dd>@Model.Prix</dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteFormationConfirmed", "Admins", new { id = Model.FormationID }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a href="@Url.Action("Formations", "Admins")" class="btn btn-default">Cancel</a>
+        </div>
+    }
+</div>

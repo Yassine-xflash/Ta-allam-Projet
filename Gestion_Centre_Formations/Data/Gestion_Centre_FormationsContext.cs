@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
 
 namespace Gestion_Centre_Formations.Data
 {
@@ -29,6 +30,11 @@ namespace Gestion_Centre_Formations.Data
         public System.Data.Entity.DbSet<Gestion_Centre_Formations.Models.Formation> Formations { get; set; }
 
         public System.Data.Entity.DbSet<Gestion_Centre_Formations.Models.FormationParticipant> FormationParticipants { get; set; }
+        public DbSet<Avis> Avis { get; set; }
+        public DbSet<Actualites> Actualites { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

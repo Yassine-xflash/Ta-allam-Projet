@@ -17,6 +17,7 @@ namespace Gestion_Centre_Formations.Controllers
 
             var FormationsCount = db.Formations.Count();
             var participantsCount = db.Participants.Count();
+            var FormateursCiunt = db.Formateurs.Count();
             var averageRating = 4.8;
 
             // Récupérer les formations les plus populaires

@@ -16,6 +16,7 @@ namespace Gestion_Centre_Formations.Models
         [Required]
         public DateTime DateInscription { get; set; }
         public int NbrFormations { get; set; }
+        public bool Supp { get; set; }
 
         //navigation pour le tableau de jointure FormationParticipants
         public ICollection<FormationParticipant> FormationParticipants { get; set; }

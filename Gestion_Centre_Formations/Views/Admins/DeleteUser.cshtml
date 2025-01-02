@@ -1,0 +1,47 @@
+﻿@model dynamic
+
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Delete User";
+}
+
+<h2>Delete User</h2>
+
+<h3>Are you sure you want to delete this user?</h3>
+<div>
+    <h4>User Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Nom</dt>
+        <dd>@Model.Nom</dd>
+        <dt>Prenom</dt>
+        <dd>@Model.Prenom</dd>
+        <dt>Email</dt>
+        <dd>@Model.Email</dd>
+        <dt>NumTel</dt>
+        <dd>@Model.NumTel</dd>
+    </dl>
+
+    @if (Model is Gestion_Centre_Formations.Models.Participant)
+    {
+        using (Html.BeginForm("DeleteUser", "Admins", new { id = Model.ParticipantID }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a href="@Url.Action("Users", "Admins")" class="btn btn-default">Cancel</a>
+            </div>
+        }
+    }
+    else if (Model is Gestion_Centre_Formations.Models.Formateur)
+    {
+        using (Html.BeginForm("DeleteUser", "Admins", new { id = Model.FormateurID }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a href="@Url.Action("Users", "Admins")" class="btn btn-default">Cancel</a>
+            </div>
+        }
+    }
+</div>

@@ -28,5 +28,6 @@ namespace Gestion_Centre_Formations.Models
         [Required]
         [MinLength(6)]
         public string Password { get; set; }
+        public bool Supp { get; set; }
     }
 }

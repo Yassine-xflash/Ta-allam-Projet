@@ -1,0 +1,72 @@
+﻿@model Gestion_Centre_Formations.Models.PaymentModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Payement";
+}
+
+<link href="https://fonts.googleapis.com/css?family=Poppins|Source+Code+Pro:300,400,600|Rock+Salt" rel="stylesheet">
+<link rel="stylesheet" href="~/Content/Payement.css" />
+
+<div class="payment-wrapper py-5">
+    <div class="payment-inner-container">
+        <div class="payment-container preload">
+            <div class="creditcard">
+                <div class="front">
+                    <div id="ccsingle"></div>
+                    <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
+                        <!-- SVG content for card front -->
+                    </svg>
+                </div>
+                <div class="back">
+                    <svg version="1.1" id="cardback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
+                        <!-- SVG content for card back -->
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="payment-form-container">
+            @using (Html.BeginForm("ProcessPayment", "Payment", FormMethod.Post))
+            {
+                <!-- Cardholder Name -->
+                <div class="payment-field-container">
+                    @Html.LabelFor(model => model.CardHolder, "Name")
+                    @Html.TextBoxFor(model => model.CardHolder, new { id = "name", @class = "payment-input", maxlength = "20", type = "text" })
+                    @Html.ValidationMessageFor(model => model.CardHolder)
+                </div>
+
+                <!-- Card Number -->
+                <div class="payment-field-container">
+                    @Html.LabelFor(model => model.CardNumber, "Card Number")
+                    <span id="payment-generatecard">generate random</span>
+                    @Html.TextBoxFor(model => model.CardNumber, new { id = "cardnumber", @class = "payment-input", type = "text", pattern = "[0-9]*", inputmode = "numeric" })
+                    <svg id="ccicon" class="payment-ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    </svg>
+                    @Html.ValidationMessageFor(model => model.CardNumber)
+                </div>
+
+                <!-- Expiry Date -->
+                <div class="payment-field-container">
+                    @Html.LabelFor(model => model.ExpiryDate, "Expiration (mm/yy)")
+                    @Html.TextBoxFor(model => model.ExpiryDate, new { id = "expirationdate", @class = "payment-input", type = "text", pattern = "[0-9]*", inputmode = "numeric" })
+                    @Html.ValidationMessageFor(model => model.ExpiryDate)
+                </div>
+
+                <!-- Security Code (CVV) -->
+                <div class="payment-field-container">
+                    @Html.LabelFor(model => model.CVV, "Security Code")
+                    @Html.TextBoxFor(model => model.CVV, new { id = "securitycode", type = "text", @class = "payment-input", pattern = "[0-9]*", inputmode = "numeric" })
+                    @Html.ValidationMessageFor(model => model.CVV)
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="btn btn-primary payment-submit-btn">Submit Payment</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script>
+<script src="~/Scripts/Payement.js"></script>

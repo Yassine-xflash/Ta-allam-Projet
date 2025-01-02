@@ -17,6 +17,7 @@ namespace Gestion_Centre_Formations.Models
         [StringLength(25)]
         public string Specialisation { get; set; }
         public int NbrFormations { get; set; }
+        public bool Supp { get; set; }
         public ICollection<Formation> Formations { get; set; }
     }
 }

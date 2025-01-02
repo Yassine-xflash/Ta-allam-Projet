@@ -50,7 +50,74 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer.PdfSharp, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.PdfSharp.1.5.0.6\lib\net45\HtmlRenderer.PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.6.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.6.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Quality, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.Quality.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Snippets, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.Snippets.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.System, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.System.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.WPFonts, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.WPFonts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -60,6 +127,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -95,8 +163,154 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\admin-mob.css" />
+    <Content Include="assets\css\admin.css" />
+    <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\materialize.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\images\3.png" />
+    <Content Include="assets\images\4.jpg" />
+    <Content Include="assets\images\adv\1.png" />
+    <Content Include="assets\images\adv\2.png" />
+    <Content Include="assets\images\adv\3.png" />
+    <Content Include="assets\images\adv\4.png" />
+    <Content Include="assets\images\adv\5.png" />
+    <Content Include="assets\images\adv\6.png" />
+    <Content Include="assets\images\ami\1.jpg" />
+    <Content Include="assets\images\ami\10.jpg" />
+    <Content Include="assets\images\ami\11.jpg" />
+    <Content Include="assets\images\ami\2.jpg" />
+    <Content Include="assets\images\ami\3.jpg" />
+    <Content Include="assets\images\ami\4.jpg" />
+    <Content Include="assets\images\ami\5.jpg" />
+    <Content Include="assets\images\ami\6.jpg" />
+    <Content Include="assets\images\ami\7.jpg" />
+    <Content Include="assets\images\ami\8.jpg" />
+    <Content Include="assets\images\ami\9.jpg" />
+    <Content Include="assets\images\ban-bg.png" />
+    <Content Include="assets\images\banner.html" />
+    <Content Include="assets\images\bg-2.html" />
+    <Content Include="assets\images\bg.html" />
+    <Content Include="assets\images\bg\1.jpg" />
+    <Content Include="assets\images\bg\2.jpg" />
+    <Content Include="assets\images\bg\3.jpg" />
+    <Content Include="assets\images\bg\4.jpg" />
+    <Content Include="assets\images\blog\2.jpg" />
+    <Content Include="assets\images\blog\3.jpg" />
+    <Content Include="assets\images\blog\4.jpg" />
+    <Content Include="assets\images\blog\5.jpg" />
+    <Content Include="assets\images\blog\6.jpg" />
+    <Content Include="assets\images\book.png" />
+    <Content Include="assets\images\cancel.png" />
+    <Content Include="assets\images\course.jpg" />
+    <Content Include="assets\images\course\3.jpg" />
+    <Content Include="assets\images\course\4.jpg" />
+    <Content Include="assets\images\course\5.jpg" />
+    <Content Include="assets\images\course\sm-1.jpg" />
+    <Content Include="assets\images\course\sm-2.jpg" />
+    <Content Include="assets\images\course\sm-3.jpg" />
+    <Content Include="assets\images\course\sm-4.jpg" />
+    <Content Include="assets\images\course\sm-5.jpg" />
+    <Content Include="assets\images\course\sm-6.jpg" />
+    <Content Include="assets\images\course\sm-7.jpg" />
+    <Content Include="assets\images\course\sm-8.jpg" />
+    <Content Include="assets\images\ev-bg.jpg" />
+    <Content Include="assets\images\ev-bg1.jpg" />
+    <Content Include="assets\images\ev-bg2.jpg" />
+    <Content Include="assets\images\ev-in-bg1.jpg" />
+    <Content Include="assets\images\event-bg.jpg" />
+    <Content Include="assets\images\event\1.jpg" />
+    <Content Include="assets\images\event\2.jpg" />
+    <Content Include="assets\images\event\3.jpg" />
+    <Content Include="assets\images\event\4.jpg" />
+    <Content Include="assets\images\facilities\1.jpg" />
+    <Content Include="assets\images\facilities\10.jpg" />
+    <Content Include="assets\images\facilities\2.jpg" />
+    <Content Include="assets\images\facilities\3.jpg" />
+    <Content Include="assets\images\facilities\4.jpg" />
+    <Content Include="assets\images\facilities\5.jpg" />
+    <Content Include="assets\images\facilities\6.jpg" />
+    <Content Include="assets\images\facilities\7.jpg" />
+    <Content Include="assets\images\facilities\8.jpg" />
+    <Content Include="assets\images\facilities\9.jpg" />
+    <Content Include="assets\images\fav.ico" />
+    <Content Include="assets\images\h-about.jpg" />
+    <Content Include="assets\images\h-about1.jpg" />
+    <Content Include="assets\images\h-adm.jpg" />
+    <Content Include="assets\images\h-adm1.jpg" />
+    <Content Include="assets\images\h-cam.jpg" />
+    <Content Include="assets\images\h-cam1.jpg" />
+    <Content Include="assets\images\h-res.jpg" />
+    <Content Include="assets\images\h-res1.jpg" />
+    <Content Include="assets\images\home-ser-bg.html" />
+    <Content Include="assets\images\home-ser-bg1.html" />
+    <Content Include="assets\images\icon\awa\1.png" />
+    <Content Include="assets\images\icon\awa\10.png" />
+    <Content Include="assets\images\icon\awa\11.png" />
+    <Content Include="assets\images\icon\awa\12.png" />
+    <Content Include="assets\images\icon\awa\2.png" />
+    <Content Include="assets\images\icon\awa\3.png" />
+    <Content Include="assets\images\icon\awa\4.png" />
+    <Content Include="assets\images\icon\awa\5.png" />
+    <Content Include="assets\images\icon\awa\6.png" />
+    <Content Include="assets\images\icon\awa\7.png" />
+    <Content Include="assets\images\icon\awa\8.png" />
+    <Content Include="assets\images\icon\awa\9.png" />
+    <Content Include="assets\images\icon\cor1.png" />
+    <Content Include="assets\images\icon\cor3.png" />
+    <Content Include="assets\images\icon\cor4.png" />
+    <Content Include="assets\images\icon\cor5.png" />
+    <Content Include="assets\images\icon\db1.png" />
+    <Content Include="assets\images\icon\db2.png" />
+    <Content Include="assets\images\icon\db3.png" />
+    <Content Include="assets\images\icon\db4.png" />
+    <Content Include="assets\images\icon\db5.png" />
+    <Content Include="assets\images\icon\flag-1.png" />
+    <Content Include="assets\images\icon\flag-2.png" />
+    <Content Include="assets\images\icon\flag-3.png" />
+    <Content Include="assets\images\icon\flag-4.png" />
+    <Content Include="assets\images\icon\flag-5.png" />
+    <Content Include="assets\images\icon\flag-6.png" />
+    <Content Include="assets\images\icon\flag-7.png" />
+    <Content Include="assets\images\icon\flag-8.png" />
+    <Content Include="assets\images\icon\form-1.png" />
+    <Content Include="assets\images\icon\form-2.png" />
+    <Content Include="assets\images\icon\form-3.png" />
+    <Content Include="assets\images\icon\form-4.png" />
+    <Content Include="assets\images\icon\h-ic1.png" />
+    <Content Include="assets\images\icon\h-ic2.png" />
+    <Content Include="assets\images\icon\h-ic3.png" />
+    <Content Include="assets\images\icon\h-ic4.png" />
+    <Content Include="assets\images\login.html" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\logo1.png" />
+    <Content Include="assets\images\map.png" />
+    <Content Include="assets\images\mm-col-bg.png" />
+    <Content Include="assets\images\placeholder.jpg" />
+    <Content Include="assets\images\pro-bg.jpg" />
+    <Content Include="assets\images\search.png" />
+    <Content Include="assets\images\seminar-bg.jpg" />
+    <Content Include="assets\images\slider\1.jpg" />
+    <Content Include="assets\images\slider\2.jpg" />
+    <Content Include="assets\images\slider\3.jpg" />
+    <Content Include="assets\images\sm\1.png" />
+    <Content Include="assets\images\sm\2.png" />
+    <Content Include="assets\images\sm\3.png" />
+    <Content Include="assets\images\sm\4.png" />
+    <Content Include="assets\images\sm\5.png" />
+    <Content Include="assets\images\sm\6.png" />
+    <Content Include="assets\images\sm\7.png" />
+    <Content Include="assets\images\sprite.png" />
+    <Content Include="assets\images\user.jpg" />
+    <Content Include="assets\images\user\1.png" />
+    <Content Include="assets\images\user\2.png" />
+    <Content Include="assets\images\user\3.png" />
+    <Content Include="assets\images\user\4.png" />
+    <Content Include="assets\images\user\5.png" />
+    <Content Include="assets\images\user\6.png" />
+    <Content Include="assets\images\weather.png" />
     <Content Include="assets\img\about.jpg" />
     <Content Include="assets\img\carousel-1.jpg" />
     <Content Include="assets\img\carousel-2.jpg" />
@@ -107,6 +321,7 @@
     <Content Include="assets\img\course-1.jpg" />
     <Content Include="assets\img\course-2.jpg" />
     <Content Include="assets\img\course-3.jpg" />
+    <Content Include="assets\img\icon.png" />
     <Content Include="assets\img\team-1.jpg" />
     <Content Include="assets\img\team-2.jpg" />
     <Content Include="assets\img\team-3.jpg" />
@@ -115,7 +330,12 @@
     <Content Include="assets\img\testimonial-2.jpg" />
     <Content Include="assets\img\testimonial-3.jpg" />
     <Content Include="assets\img\testimonial-4.jpg" />
+    <Content Include="assets\js\admain.min.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\custom.js" />
+    <Content Include="assets\js\datatables-simple-demo.js" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\materialize.min.js" />
     <Content Include="assets\js\script.js" />
     <Content Include="assets\lib\animate\animate.css" />
     <Content Include="assets\lib\animate\animate.min.css" />
@@ -150,6 +370,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Payement.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -158,6 +379,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Payement.js" />
     <Content Include="Web.config" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\base.css" />
@@ -208,6 +430,7 @@
     <Compile Include="Controllers\FormationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
+    <Compile Include="Controllers\PayementController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Data\Gestion_Centre_FormationsContext.cs" />
@@ -222,14 +445,33 @@
     <Compile Include="Migrations\202412011206146_UpdateFormationModelConstraints.Designer.cs">
       <DependentUpon>202412011206146_UpdateFormationModelConstraints.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202412311634210_AddAvisAndActualites.cs" />
+    <Compile Include="Migrations\202412311634210_AddAvisAndActualites.Designer.cs">
+      <DependentUpon>202412311634210_AddAvisAndActualites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501012038253_AddFormationToCertificateAndExam.cs" />
+    <Compile Include="Migrations\202501012038253_AddFormationToCertificateAndExam.Designer.cs">
+      <DependentUpon>202501012038253_AddFormationToCertificateAndExam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501021329505_AddSuppColumn.cs" />
+    <Compile Include="Migrations\202501021329505_AddSuppColumn.Designer.cs">
+      <DependentUpon>202501021329505_AddSuppColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Actualites.cs" />
+    <Compile Include="Models\Avis.cs" />
+    <Compile Include="Models\Certificate.cs" />
+    <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="ViewModels\AboutPage.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Formateur.cs" />
+    <Compile Include="ViewModels\AdminPage.cs" />
     <Compile Include="ViewModels\FormateurFormationDetailsViewModel.cs" />
     <Compile Include="ViewModels\FormateurProfileViewModel.cs" />
     <Compile Include="Models\Formation.cs" />
     <Compile Include="Models\FormationParticipant.cs" />
+    <Compile Include="ViewModels\FormationsPage.cs" />
     <Compile Include="ViewModels\LogInModel.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="ViewModels\SignUpModel.cs" />
@@ -280,6 +522,21 @@
     <Content Include="Views\Admins\Edit.cshtml" />
     <Content Include="Views\Admins\Delete.cshtml" />
     <Content Include="Views\Formations\Index.cshtml" />
+    <Content Include="Views\Shared\_HeaderPanel.cshtml" />
+    <Content Include="Views\Payement\Index.cshtml" />
+    <Content Include="Views\Participants\Index.cshtml" />
+    <Content Include="Views\Admins\Users.cshtml" />
+    <Content Include="Views\Admins\ProfileUser.cshtml" />
+    <Content Include="Views\Admins\CreateUser.cshtml" />
+    <Content Include="Views\Admins\EditUser.cshtml" />
+    <Content Include="Views\Admins\DeleteUser.cshtml" />
+    <Content Include="Views\Admins\DeleteUserConfirmed.cshtml" />
+    <Content Include="Views\Admins\Formations.cshtml" />
+    <Content Include="Views\Admins\CreateFormation.cshtml" />
+    <Content Include="Views\Admins\DetailsFormation.cshtml" />
+    <Content Include="Views\Admins\EditFormation.cshtml" />
+    <Content Include="Views\Admins\DeleteFormation.cshtml" />
+    <Content Include="Views\Admins\DeleteFormationConfirmed.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -299,9 +556,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\images\Actualite\" />
     <Folder Include="Views\Formateurs\" />
     <Folder Include="Views\FormationParticipants\" />
-    <Folder Include="Views\Participants\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
@@ -311,6 +568,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202412011206146_UpdateFormationModelConstraints.resx">
       <DependentUpon>202412011206146_UpdateFormationModelConstraints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412311634210_AddAvisAndActualites.resx">
+      <DependentUpon>202412311634210_AddAvisAndActualites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501012038253_AddFormationToCertificateAndExam.resx">
+      <DependentUpon>202501012038253_AddFormationToCertificateAndExam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501021329505_AddSuppColumn.resx">
+      <DependentUpon>202501021329505_AddSuppColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -345,8 +611,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

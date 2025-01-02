@@ -1,7 +1,447 @@
-﻿
+﻿@model Gestion_Centre_Formations.Models.AdminPage
+
 @{
-    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Admin Dashboard";
 }
 
-<h2>Index</h2>
+<!--== breadcrumbs ==-->
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#"> Dashboard</a>
+        </li>
+    </ul>
+</div>
+<!--== DASHBOARD INFO ==-->
+<div class="sb2-2-1">
+    <h2>Admin Dashboard</h2>
+    <div class="db-2">
+        <ul>
+            <li>
+                <div class="dash-book dash-b-1">
+                    <h5>All Courses</h5>
+                    <h4>@Model.FormationsCount</h4>
+                    <a href="#">View more</a>
+                </div>
+            </li>
+            <li>
+                <div class="dash-book dash-b-2">
+                    <h5>Admission</h5>
+                    <h4>672</h4>
+                    <a href="#">View more</a>
+                </div>
+            </li>
+            <li>
+                <div class="dash-book dash-b-3">
+                    <h5>Students</h5>
+                    <h4>@Model.ParticipantsCount</h4>
+                    <a href="#">View more</a>
+                </div>
+            </li>
+            <li>
+                <div class="dash-book dash-b-4">
+                    <h5>Enquiry</h5>
+                    <h4>24</h4>
+                    <a href="#">View more</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--== User Details ==-->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Student Details</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover" id="tablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Id</th>
+                                    <th>Status</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var participant in Model.Participants)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="#"><span class="list-enq-name">@participant.Nom @participant.Prenom</span></a>
+                                        </td>
+                                        <td>@participant.NumTel</td>
+                                        <td>@participant.Email</td>
+                                        <td>@participant.ParticipantID</td>
+                                        <td>
+                                            <span class="label label-success">Active</span>
+                                        </td>
+                                        <td><a href="@Url.Action("ProfileUser", "Admin", new { id = participant.ParticipantID })" class="ad-st-view">View</a></td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--== Courses Details ==-->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Course Details</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Category</th>
+                                    <th>Durations</th>
+                                    <th>Prix</th>
+                                    <th>Total Students</th>
+                                    <th>Status</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var formation in Model.Formations)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="admin-student-details.html"><span class="list-enq-name">@formation.Titre</span><span class="list-enq-city">@formation.Description</span></a>
+                                        </td>
+                                        <td>@formation.Categorie</td>
+                                        <td>@formation.Duration</td>
+                                        <td>@formation.Prix</td>
+                                        <td>@(formation.FormationParticipants != null ? formation.FormationParticipants.Count : 0)</td>
+                                        <td>
+                                            <span class="label label-success">Active</span>
+                                        </td>
+                                        <td><a href="admin-student-details.html" class="ad-st-view">View</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sb2-2-3">
+    <div class="row">
+        <!--== Listing Enquiry ==-->
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Exam Time Tables</h4>
+                    <p>Education is about teaching, learning skills and knowledge.</p>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Degree</th>
+                                    <th>Exam Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Timing</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="filled-in" id="filled-in-box-1" checked="checked" />
+                                        <label for="filled-in-box-1"></label>
+                                    </td>
+                                    <td>MBA</td>
+                                    <td>
+                                        <span class="list-enq-name">Civil engineering</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>10:00am</td>
+                                    <td>01:00pm</td>
+                                    <td>03:00Hrs</td>
+                                    <td>
+                                        <a href="admin-exam.html" class="ad-st-view">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="filled-in" id="filled-in-box-2" />
+                                        <label for="filled-in-box-2"></label>
+                                    </td>
+                                    <td>MBA</td>
+                                    <td>
+                                        <span class="list-enq-name">Google Business</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>10:00am</td>
+                                    <td>01:00pm</td>
+                                    <td>03:00Hrs</td>
+                                    <td>
+                                        <a href="admin-exam.html" class="ad-st-view">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="filled-in" id="filled-in-box-3" />
+                                        <label for="filled-in-box-3"></label>
+                                    </td>
+                                    <td>MBA</td>
+                                    <td>
+                                        <span class="list-enq-name">Statistics</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>10:00am</td>
+                                    <td>01:00pm</td>
+                                    <td>03:00Hrs</td>
+                                    <td>
+                                        <a href="admin-exam.html" class="ad-st-view">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="filled-in" id="filled-in-box-4" />
+                                        <label for="filled-in-box-4"></label>
+                                    </td>
+                                    <td>MBA</td>
+                                    <td>
+                                        <span class="list-enq-name">Business Management</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>10:00am</td>
+                                    <td>01:00pm</td>
+                                    <td>03:00Hrs</td>
+                                    <td>
+                                        <a href="admin-exam.html" class="ad-st-view">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="filled-in" id="filled-in-box-5" />
+                                        <label for="filled-in-box-5"></label>
+                                    </td>
+                                    <td>MBA</td>
+                                    <td>
+                                        <span class="list-enq-name">Art/Design</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>10:00am</td>
+                                    <td>01:00pm</td>
+                                    <td>03:00Hrs</td>
+                                    <td>
+                                        <a href="admin-exam.html" class="ad-st-view">View</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--== Latest Activity ==-->
+<div class="sb2-2-3">
+    <div class="row">
+        <!--== Latest Activity ==-->
+        <div class="col-md-6">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Latest Activity</h4>
+                    <p>Education is about teaching, learning skills and knowledge.</p>
+                </div>
+                <div class="tab-inn list-act-hom">
+                    <ul>
+                        <li class="list-act-hom-con">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <h4><span>12 may, 2017</span> Welcome to Academy</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+                        </li>
+                        <li class="list-act-hom-con">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <h4><span>08 Jun, 2017</span> Academy Leadership</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+                        </li>
+                        <li class="list-act-hom-con">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <h4><span>27 July, 2017</span> Awards and Achievement</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+                        </li>
+                        <li class="list-act-hom-con">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <h4><span>14 Aug, 2017</span> Facilities and Management</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+                        </li>
+                        <li class="list-act-hom-con">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <h4><span>24 Sep, 2017</span> Nation award winning 2017</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--== Social Media ==-->
+        <div class="col-md-6">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Social Media</h4>
+                    <p>Education is about teaching, learning skills and knowledge.</p>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Media</th>
+                                    <th>Name</th>
+                                    <th>Share</th>
+                                    <th>Like</th>
+                                    <th>Members</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/1.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">Linked In</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/2.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">Twitter</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/3.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">Facebook</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/4.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">Google Plus</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/5.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">YouTube</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/6.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">WhatsApp</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/7.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">VK</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="list-img"><img src="images/sm/2.png" alt=""></span>
+                                    </td>
+                                    <td>
+                                        <span class="list-enq-name">Twitter</span><span class="list-enq-city">Illunois, United States</span>
+                                    </td>
+                                    <td>15K</td>
+                                    <td>18K</td>
+                                    <td>
+                                        <span class="label label-success">263</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+<script src="~/assets/js/admain.min.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/materialize.min.js"></script>
+<script src="~/assets/js/custom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="~/assets/js/datatables-simple-demo.js"></script>
 
