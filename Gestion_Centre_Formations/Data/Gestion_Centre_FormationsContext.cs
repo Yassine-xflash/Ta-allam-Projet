@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using static System.Collections.Specialized.BitVector32;
 using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
+using Section = Gestion_Centre_Formations.Models.Section;
 
 namespace Gestion_Centre_Formations.Data
 {
@@ -33,7 +35,9 @@ namespace Gestion_Centre_Formations.Data
         public DbSet<Avis> Avis { get; set; }
         public DbSet<Actualites> Actualites { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
-        public DbSet<Exam> Exams { get; set; }
+
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

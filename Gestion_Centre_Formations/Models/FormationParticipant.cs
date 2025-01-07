@@ -23,5 +23,9 @@ namespace Gestion_Centre_Formations.Models
         public int ParticipantID { get; set; }
         //navigation pour le participant
         public Participant Participant { get; set; }
+        public bool HasCertificate { get; set; }
+
+        public int Rating { get; set; }
+        public string Comment { get; set; }
     }
 }

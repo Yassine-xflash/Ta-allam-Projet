@@ -24,7 +24,7 @@
         <dd>@Model.Prix</dd>
     </dl>
 
-    @using (Html.BeginForm("DeleteFormationConfirmed", "Admins", new { id = Model.FormationID }, FormMethod.Post))
+    @using (Html.BeginForm("DeleteFormation", "Admins", new { id = Model.FormationID }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">

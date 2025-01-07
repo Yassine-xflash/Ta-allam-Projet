@@ -28,6 +28,7 @@ namespace Gestion_Centre_Formations.Models
         public int Duration { get; set; }
         [Required]
         public double Prix { get; set; }
+        public bool Completed { get; set; }
 
         public bool Supp { get; set; }
         [Required]

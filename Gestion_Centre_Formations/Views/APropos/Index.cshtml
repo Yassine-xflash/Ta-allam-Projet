@@ -10,12 +10,11 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 text-center">
-                <h1 class="display-3 text-white animated slideInDown">À propos de nous</h1>
+                <h1 class="display-3 text-white animated slideInDown">About Us!</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-white" href="home.php">Accueil</a></li>
-                        <li class="breadcrumb-item"><a class="text-white" href="contact.php">Contact</a></li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">À propos</li>
+                        <li class="breadcrumb-item"><a class="text-white" href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">About</li>
                     </ol>
                 </nav>
             </div>
@@ -73,76 +72,78 @@
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                 <div class="position-relative h-100">
-                    <img class="img-fluid position-absolute w-100 h-100" src="../assets/img/about.jpg" alt="" style="object-fit: cover;">
+                    <img class="img-fluid position-absolute w-100 h-100" src="../assets/img/about.jpg" alt="About eLEARNING" style="object-fit: cover;">
                 </div>
             </div>
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <h6 class="section-title bg-white text-start text-primary pe-3">À propos de nous</h6>
-                <h1 class="mb-4">Bienvenue sur eLEARNING</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
+                <h1 class="mb-4">Welcome to Ta'allam</h1>
+                <p class="mb-4">At Ta'allam' Academy, we believe in the power of education to transform lives. Our platform offers flexible and accessible learning opportunities for everyone, no matter where you are.</p>
+                <p class="mb-4">With courses designed by experts and high-quality educational resources, we support you in your learning journey to achieve your personal and professional goals.</p>
                 <div class="row gy-2 gx-4 mb-4">
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Formateurs qualifiés</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Certified Instructors</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Cours en ligne</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>100% Online Courses</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Certificat international</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Internationally Recognized Certificates</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Formateurs qualifiés</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Personalized Support</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Cours en ligne</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Hands-On Projects</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Certificat international</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Lifetime Access to Courses</p>
                     </div>
                 </div>
-                <a class="btn btn-primary py-3 px-5 mt-2" href="">En savoir plus</a>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="@Url.Action("SignUp", "Authentification")">Join Nom</a>
             </div>
         </div>
     </div>
 </div>
 <!-- About End -->
+
 <!-- Testimonial Start -->
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="owl-carousel testimonial-carousel position-relative">
-            <div class="testimonial-item text-center">
-                <img class="border rounded-circle p-2 mx-auto mb-3" src="~/assets/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+            @if (Model.RecentReviews != null && Model.RecentReviews.Any())
+            {
+                foreach (var review in Model.RecentReviews)
+                {
+                    <div class="testimonial-item text-center">
+                        <!-- Display a placeholder image for the student -->
+                        <h5 class="mb-0">@review.ParticipantName</h5>
+                        <p>Student</p>
+                        <div class="testimonial-text bg-light text-center p-4">
+                            <p class="mb-0">@review.Comment</p>
+                            <div class="mt-2">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= review.Rating)
+                                    {
+                                        <i class="fa fa-star text-primary"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star text-secondary"></i>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="testimonial-item text-center">
+                    <p>No reviews available.</p>
                 </div>
-            </div>
-            <div class="testimonial-item text-center">
-                <img class="border rounded-circle p-2 mx-auto mb-3" src="~/assets/img/testimonial-2.jpg" style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-            </div>
-            <div class="testimonial-item text-center">
-                <img class="border rounded-circle p-2 mx-auto mb-3" src="~/assets/img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-            </div>
-            <div class="testimonial-item text-center">
-                <img class="border rounded-circle p-2 mx-auto mb-3" src="~/assets/img/testimonial-4.jpg" style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

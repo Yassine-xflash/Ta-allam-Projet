@@ -1,0 +1,90 @@
+﻿@model Gestion_Centre_Formations.Models.ActualitesPage
+
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Add Actualite";
+}
+
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="index-2.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#"> Add new Actualite</a>
+        </li>
+        <li class="page-back">
+            <a href="index-2.html"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+
+<!--== User Details ==-->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="sb2-2-add-blog sb2-2-1">
+                    <h2>Add New Actualite</h2>
+                    <ul class="nav nav-tabs tab-list">
+                        <li class="active">
+                            <a data-toggle="tab" href="#home" aria-expanded="true"><i class="fa fa-info" aria-hidden="true"></i> <span>Detail</span></a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- Actualite Details Tab -->
+                        <div id="home" class="tab-pane fade active in">
+                            <div class="box-inn-sp">
+                                <div class="inn-title">
+                                    <h4>Actualite Information</h4>
+                                </div>
+                                <div class="bor">
+                                    @using (Html.BeginForm("CreateActualite", "Admins", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                @Html.TextBoxFor(model => model.Title, new { @class = "validate", id = "list-title" })
+                                                <label for="list-title">Actualite Title</label>
+                                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="input-field col s12">
+                                                @Html.TextAreaFor(model => model.Content, new { @class = "materialize-textarea", id = "list-content" })
+                                                <label for="list-content">Actualite Description</label>
+                                                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <input type="number" id="section-count" class="validate" min="1" value="1" />
+                                                <label for="section-count">Number of Sections</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="file-field input-field col s12">
+                                                <div class="btn admin-upload-btn">
+                                                    <span>Upload Image</span>
+                                                    @Html.TextBoxFor(model => model.ImageFile, new { type = "file", id = "ImageFile", accept = ".jpg" })
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Upload actualite image (only .jpg)">
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

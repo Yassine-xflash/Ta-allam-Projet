@@ -1,0 +1,121 @@
+﻿@model Gestion_Centre_Formations.Models.PayementPage
+
+@{
+    ViewBag.Title = "Payments";
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+}
+
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#">Payments</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-inn-sp">
+            <div class="inn-title">
+                <h4>All Payments</h4>
+            </div>
+            <div class="tab-inn">
+                <div class="table-responsive table-desi">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Formation</th>
+                                <th>Participant</th>
+                                <th>Payment Date</th>
+                                <th>Amount</th>
+                                <th>Payment Method</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var payment in Model.Payements)
+                            {
+                                <tr>
+                                    <td>@payment.Id</td>
+                                    <td>@payment.Formation.Titre</td>
+                                    <td>@payment.Participant.Nom @payment.Participant.Prenom</td>
+                                    <td>@payment.PaymentDate.ToShortDateString()</td>
+                                    <td>@payment.Amount.ToString("C")</td>
+                                    <td>@payment.PaymentMethod</td>
+                                    <td>
+                                        @{
+                                            string labelClass = "";
+                                            switch (payment.PaymentStatus)
+                                            {
+                                                case "Pending Approval":
+                                                    labelClass = "label-warning";
+                                                    break;
+                                                case "Accepting Approval":
+                                                    labelClass = "label-info";
+                                                    break;
+                                                case "Accepted":
+                                                    labelClass = "label-success";
+                                                    break;
+                                                case "Denying":
+                                                    labelClass = "label-danger";
+                                                    break;
+                                            }
+                                        }
+                                        <span class="label @labelClass">
+                                            @payment.PaymentStatus
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "DetailsPayment", new { id = payment.Id }, new { @class = "ad-st-view" })
+                                        
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("ChangeStatus", new { id = payment.Id })"
+                                           class="ad-st-view"
+                                           onclick="return confirmChangeStatus('@payment.PaymentStatus')">
+                                            Change Status
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript for Confirmation -->
+<script>
+    function confirmChangeStatus(currentStatus) {
+        var newStatus;
+        switch (currentStatus) {
+            case "Pending Approval":
+                newStatus = "Accepting Approval";
+                break;
+            case "Accepting Approval":
+                newStatus = "Accepted";
+                break;
+            case "Accepted":
+                newStatus = "Denying";
+                break;
+            case "Denying":
+                newStatus = "Pending Approval";
+                break;
+            default:
+                newStatus = "Pending Approval";
+                break;
+        }
+
+        return confirm(`Are you sure you want to change the status from "${currentStatus}" to "${newStatus}"?`);
+    }
+</script>
+

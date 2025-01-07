@@ -1,0 +1,125 @@
+@model Gestion_Centre_Formations.Models.Certificate
+@{
+    Layout = null;  // This disables the shared layout for this view
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@Model.Participant.Prenom @Model.Participant.Nom - Certificate</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="~/assets/css/Certif.css">
+
+    <!-- Load html2pdf.js from a CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+</head>
+<body>
+    <div id="certificate" class="container pm-certificate-container">
+        <div class="outer-border"></div>
+        <div class="inner-border"></div>
+
+        <div class="pm-certificate-border col-xs-12">
+            <div class="pm-header-image text-center">
+                <img src="~/assets/images/Certificate/header.png" alt="Header Image" class="pm-header-logo">
+            </div>
+            <div class="row pm-certificate-header">
+
+            </div>
+            <div class="pm-certificate-title cursive col-xs-12 text-center">
+                <h2>Ta'allam Schools Certificate of Completion</h2>
+            </div>
+            <div class="row pm-certificate-body">
+
+                <div class="pm-certificate-block">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
+                                <span class="pm-name-text bold">@Model.Participant.Prenom @Model.Participant.Nom</span>
+                            </div>
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            <div class="pm-earned col-xs-8 text-center">
+                                <span class="pm-earned-text padding-0 block cursive">has earned at</span>
+                                <span class="pm-credits-text block bold sans">@Model.DateIssued.ToString("MMM dd, yyyy 'at' hh:mmtt 'UTC'")</span>
+                            </div>
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            <div class="col-xs-12"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            <div class="pm-course-title col-xs-8 text-center">
+                                <span class="pm-earned-text block cursive">while completing the training course entitled</span>
+                            </div>
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            <div class="pm-course-title underline col-xs-8 text-center">
+                                <span class="pm-credits-text block bold sans">@Model.Formation.Titre </span>
+                            </div>
+                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="pm-certificate-footer">
+                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                <span class="pm-credits-text block sans">Ta'allam School District</span><br>
+                                <span class="pm-empty-space block underline"><img src="~/assets/images/Certificate/signat.png" class="pm-signature" alt="Signature"></span>
+                                <span class="bold block">Ta'allam Instructional Specialist , Staff Development</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- LEAVE EMPTY -->
+                                <img src="~/assets/images/Certificate/logo.png" class="pm-logo" alt="Logo">
+                            </div>
+                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                <span class="pm-empty-space block underline"></span>
+                                <span class="bold block">Certificate ID : @Model.CertificateID</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" onclick="downloadCertificate()">Download Certificate</button>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script>
+       function downloadCertificate() {
+            // Target the certificate div and pass it to html2pdf
+            const certificate = document.getElementById('certificate');
+            
+            // html2pdf.js provides a simple API to download the PDF
+            const options = {
+                margin: 0,
+                filename: 'Tallam_Certificate_' + "@Model.Formation.Titre".replace(/\s+/g, '_') + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+
+            // Convert HTML to PDF
+            html2pdf().from(certificate).set(options).save();
+        }
+    </script>
+</body>
+</html>

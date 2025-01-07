@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Gestion_Centre_Formations.Models.FormationParticipant>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "My Courses";
+}
+
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">My Courses</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">My Courses</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center text-primary px-3">My Learning Journey</h6>
+        <h1 class="mb-5">Enrolled Courses</h1>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var enrollment in Model)
+        {
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="course-item bg-light hover-lift">
+                    <div class="position-relative overflow-hidden">
+                        @{
+                            var imageName = enrollment.Formation.Titre.Replace(" ", "-").ToLower();
+                        }
+                        <img class="img-fluid" src="~/assets/images/course/@(imageName).jpg" alt="@enrollment.Formation.Titre">
+                    </div>
+                    <div class="text-center p-4 pb-0">
+                        <h3 class="mb-0">$@enrollment.Formation.Prix</h3>
+                        <h5 class="mb-4">@enrollment.Formation.Titre</h5>
+                    </div>
+                    <div class="d-flex border-top">
+                        <small class="flex-fill text-center border-end py-2">
+                            <i class="fa fa-user-tie text-primary me-2"></i>@enrollment.Formation.Formateur.Nom @enrollment.Formation.Formateur.Prenom
+                        </small>
+                        <small class="flex-fill text-center py-2">
+                            <i class="fa fa-clock text-primary me-2"></i>@enrollment.Formation.Duration Hrs
+                        </small>
+                    </div>
+                    <div class="text-center p-4">
+                        @if (enrollment.Rating > 0)
+                        {
+                            <a href="@Url.Action("RemoveRating", "ParticipantProfile", new { id = enrollment.FormationParticipantID })"
+                               class="btn btn-danger py-2 px-4">Remove My Rating</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Rate", "ParticipantProfile", new { id = enrollment.FormationParticipantID })"
+                               class="btn btn-primary py-2 px-4">Rate This Course</a>
+                        }
+                    </div>
+                    <div class="text-center p-4">
+                        @if (enrollment.Formation.Completed && !enrollment.HasCertificate)
+                        {
+                            <form action="@Url.Action("GenerateCertificate", "ParticipantProfile")" method="post">
+                                <input type="hidden" name="participantId" value="@enrollment.Participant.ParticipantID" />
+                                <input type="hidden" name="formationId" value="@enrollment.Formation.FormationID" />
+                                <button type="submit" class="btn btn-success py-2 px-4">Get Certified</button>
+                            </form>
+                        }
+                        else if (enrollment.HasCertificate)
+                        {
+                            <a href="@Url.Action("Certifications", "Certificate")" class="btn btn-secondary py-2 px-4">View Certification</a>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+
+    .course-item {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+</style>

@@ -1,72 +1,284 @@
 ﻿@model Gestion_Centre_Formations.Models.PaymentModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Payement";
+    ViewBag.Title = "Payment";
 }
 
-<link href="https://fonts.googleapis.com/css?family=Poppins|Source+Code+Pro:300,400,600|Rock+Salt" rel="stylesheet">
+<!-- CSS Links -->
 <link rel="stylesheet" href="~/Content/Payement.css" />
+<link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-<div class="payment-wrapper py-5">
-    <div class="payment-inner-container">
-        <div class="payment-container preload">
-            <div class="creditcard">
-                <div class="front">
-                    <div id="ccsingle"></div>
-                    <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
-                        <!-- SVG content for card front -->
-                    </svg>
+<div class="containerPay d-flex justify-content-center mt-5 mb-5">
+    <div class="row g-3">
+        <!-- Payment Method Section -->
+        <div class="col-md-6">
+            <span>Payment Method</span>
+            <div class="card">
+                @using (Html.BeginForm("ProcessPayment", "Payement", FormMethod.Post, new { id = "paymentForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("courseId", (int)ViewBag.CourseId)
+                    @Html.Hidden("userId", (int)ViewBag.UserId)
+
+                <div class="accordion" id="accordionExample">
+                    <!-- PayPal -->
+                    <div class="card">
+                        <div class="card-header p-0" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span>Paypal</span>
+                                        <img src="https://i.imgur.com/7kQEsHU.png" width="30">
+                                    </div>
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                @Html.LabelFor(model => model.PayPalEmail, "PayPal Email")
+                                @Html.TextBoxFor(model => model.PayPalEmail, new { @class = "form-control", placeholder = "Paypal email", id = "PayPalEmail" })
+                                @Html.ValidationMessageFor(model => model.PayPalEmail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Card -->
+                    <div class="card">
+                        <div class="card-header p-0">
+                            <h2 class="mb-0">
+                                <button class="btn btn-light btn-block text-left p-3 rounded-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span>Credit card</span>
+                                        <div class="icons">
+                                            <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                            <img src="https://i.imgur.com/W1vtnOV.png" width="30">
+                                            <img src="https://i.imgur.com/35tC99g.png" width="30">
+                                            <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body payment-card-body">
+                                <div class="payment-field-container">
+                                    @Html.LabelFor(model => model.CardHolder, "Cardholder Name")
+                                    @Html.TextBoxFor(model => model.CardHolder, new { @class = "form-control", placeholder = "Cardholder Name", id = "CardHolder" })
+                                    @Html.ValidationMessageFor(model => model.CardHolder, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="payment-field-container">
+                                    @Html.LabelFor(model => model.CardNumber, "Card Number")
+                                    @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control", placeholder = "0000 0000 0000 0000", id = "CardNumber" })
+                                    @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.ExpiryDate, "Expiry Date")
+                                        @Html.TextBoxFor(model => model.ExpiryDate, new { @class = "form-control", placeholder = "MM/YY", id = "ExpiryDate", maxlength = "5" })
+                                        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.CVV, "CVC/CVV")
+                                        @Html.TextBoxFor(model => model.CVV, new { @class = "form-control", placeholder = "000", id = "CVV", maxlength = "4" })
+                                        @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <span class="text-muted certificate-text"><i class="fa fa-lock"></i> Your transaction is secured with SSL certificate</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary mt-3" style="display:center;">Submit Payment</button>
+                    </div>
                 </div>
-                <div class="back">
-                    <svg version="1.1" id="cardback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
-                        <!-- SVG content for card back -->
-                    </svg>
-                </div>
+                }
             </div>
         </div>
-        <div class="payment-form-container">
-            @using (Html.BeginForm("ProcessPayment", "Payment", FormMethod.Post))
-            {
-                <!-- Cardholder Name -->
-                <div class="payment-field-container">
-                    @Html.LabelFor(model => model.CardHolder, "Name")
-                    @Html.TextBoxFor(model => model.CardHolder, new { id = "name", @class = "payment-input", maxlength = "20", type = "text" })
-                    @Html.ValidationMessageFor(model => model.CardHolder)
-                </div>
 
-                <!-- Card Number -->
-                <div class="payment-field-container">
-                    @Html.LabelFor(model => model.CardNumber, "Card Number")
-                    <span id="payment-generatecard">generate random</span>
-                    @Html.TextBoxFor(model => model.CardNumber, new { id = "cardnumber", @class = "payment-input", type = "text", pattern = "[0-9]*", inputmode = "numeric" })
-                    <svg id="ccicon" class="payment-ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    </svg>
-                    @Html.ValidationMessageFor(model => model.CardNumber)
+        <!-- Summary Section -->
+        <div class="col-md-6">
+            <span>Summary</span>
+            <div class="card">
+                <div class="d-flex justify-content-between p-3">
+                    <div class="d-flex flex-column">
+                        <span>Total Amount <i class="fa fa-caret-down"></i></span>
+                    </div>
+                    <div class="mt-1">
+                        <sup class="super-price">@ViewBag.CoursePrice DH</sup>
+                    </div>
                 </div>
-
-                <!-- Expiry Date -->
-                <div class="payment-field-container">
-                    @Html.LabelFor(model => model.ExpiryDate, "Expiration (mm/yy)")
-                    @Html.TextBoxFor(model => model.ExpiryDate, new { id = "expirationdate", @class = "payment-input", type = "text", pattern = "[0-9]*", inputmode = "numeric" })
-                    @Html.ValidationMessageFor(model => model.ExpiryDate)
+                <hr class="mt-0 line">
+                <div class="p-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Course Name</span>
+                        <span>@ViewBag.CourseTitle</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Course Price</span>
+                        <span>@ViewBag.CoursePrice DH</span>
+                    </div>
                 </div>
-
-                <!-- Security Code (CVV) -->
-                <div class="payment-field-container">
-                    @Html.LabelFor(model => model.CVV, "Security Code")
-                    @Html.TextBoxFor(model => model.CVV, new { id = "securitycode", type = "text", @class = "payment-input", pattern = "[0-9]*", inputmode = "numeric" })
-                    @Html.ValidationMessageFor(model => model.CVV)
+                <hr class="mt-0 line">
+                <div class="p-3 d-flex justify-content-between">
+                    <div class="d-flex flex-column">
+                        <span>By Clicking Submit you agree to our payement and refund policies</span>
+                        <small>no refund🙂</small>
+                    </div>
                 </div>
-
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit" class="btn btn-primary payment-submit-btn">Submit Payment</button>
-                </div>
-            }
+            </div>
         </div>
     </div>
 </div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script>
-<script src="~/Scripts/Payement.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("paymentForm");
+    const submitButton = form.querySelector("button[type='submit']");
+
+    // Input fields
+    const cardHolder = document.getElementById("CardHolder");
+    const cardNumber = document.getElementById("CardNumber");
+    const expiryDate = document.getElementById("ExpiryDate");
+    const cvv = document.getElementById("CVV");
+    const payPalEmail = document.getElementById("PayPalEmail");
+
+    // Automatically add '/' to expiry date
+    expiryDate.addEventListener("input", function () {
+        let value = expiryDate.value.replace(/\D/g, ""); // Remove non-digits
+        if (value.length > 2) {
+            value = value.slice(0, 2) + "/" + value.slice(2, 4); // Add '/' after MM
+        }
+        expiryDate.value = value;
+    });
+
+    // Validate card number using Luhn algorithm
+    function isValidCardNumber(number) {
+        number = number.replace(/\D/g, ""); // Remove non-digits
+        if (!/^\d{16}$/.test(number)) {
+            console.log("Card number is not 16 digits.");
+            return false; // Check for 16 digits
+        }
+
+        // Luhn algorithm
+        let sum = 0;
+        for (let i = 0; i < number.length; i++) {
+            let digit = parseInt(number.charAt(i), 10);
+            if ((number.length - i) % 2 === 0) {
+                digit *= 2;
+                if (digit > 9) digit -= 9;
+            }
+            sum += digit;
+        }
+        const isValid = sum % 10 === 0;
+        console.log("Card number is valid:", isValid);
+        return isValid;
+    }
+
+    // Validate expiry date (MM/YY format)
+    function isValidExpiryDate(date) {
+        const isValid = /^(0[1-9]|1[0-2])\/\d{2}$/.test(date);
+        console.log("Expiry date is valid:", isValid);
+        return isValid;
+    }
+
+    // Validate CVV (3 or 4 digits)
+    function isValidCVV(cvv) {
+        const isValid = /^\d{3,4}$/.test(cvv);
+        console.log("CVV is valid:", isValid);
+        return isValid;
+    }
+
+    // Validate PayPal email
+    function isValidEmail(email) {
+        const isValid = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(email);
+        console.log("PayPal email is valid:", isValid);
+        return isValid;
+    }
+
+    // Validate individual fields
+    function validateField(field, isValid, errorMessage) {
+        const errorElement = field.nextElementSibling; // Validation message
+        if (isValid(field.value)) {
+            field.classList.remove("is-invalid");
+            field.classList.add("is-valid");
+            errorElement.textContent = ""; // Clear error message
+        } else {
+            field.classList.add("is-invalid");
+            field.classList.remove("is-valid");
+            errorElement.textContent = errorMessage; // Show error message
+        }
+    }
+
+    // Attach validation events
+    cardHolder.addEventListener("input", () =>
+        validateField(cardHolder, (value) => value.trim() !== "", "Cardholder name is required.")
+    );
+
+    cardNumber.addEventListener("input", () =>
+        validateField(cardNumber, isValidCardNumber, "Invalid card number.")
+    );
+
+    expiryDate.addEventListener("input", () =>
+        validateField(expiryDate, isValidExpiryDate, "Expiry date must be in MM/YY format.")
+    );
+
+    cvv.addEventListener("input", () =>
+        validateField(cvv, isValidCVV, "CVV must be 3 or 4 digits.")
+    );
+
+    payPalEmail.addEventListener("input", () =>
+        validateField(payPalEmail, isValidEmail, "Enter a valid PayPal email address.")
+    );
+
+    // Final validation before submission
+    form.addEventListener("submit", function (event) {
+        let isPayPalValid = false;
+        let isCreditCardValid = false;
+
+        // Validate PayPal email
+        if (payPalEmail.value.trim() && isValidEmail(payPalEmail.value)) {
+            isPayPalValid = true;
+        }
+
+        // Validate Credit Card fields
+        if (
+            cardHolder.value.trim() &&
+            isValidCardNumber(cardNumber.value) &&
+            isValidExpiryDate(expiryDate.value) &&
+            isValidCVV(cvv.value)
+        ) {
+            isCreditCardValid = true;
+        }
+
+        // Prevent submission if neither PayPal nor Credit Card is valid
+        if (!isPayPalValid && !isCreditCardValid) {
+            event.preventDefault();
+            alert("Please correct the errors in the form before submitting.");
+        } else {
+            console.log("Form is valid. Submitting...");
+        }
+    });
+});
+</script>
+
+<style>
+    /* Highlight invalid fields */
+    .is-invalid {
+        border: 2px solid red;
+    }
+
+    .is-valid {
+        border: 2px solid green;
+    }
+
+    /* Error message styling */
+    .text-danger {
+        color: red;
+        font-size: 0.8em;
+        margin-top: 5px;
+    }
+</style>

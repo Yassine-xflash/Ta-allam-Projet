@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="~/Content/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <!-- Favicon -->
-    <link href="~/assets/img/icon.png" rel="icon">
+    <link href="~/assets/images/Certificate/logo.png" rel="icon">
 
 
 
@@ -46,21 +46,8 @@
         <div class="container">
             <!-- Logo -->
             <a href="@Url.Action("Index", "Home")" class="navbar-brand d-flex align-items-center">
-                <h2 class="m-0 text-primary"><i class="fa fa-feather me-3"></i>Taʿallam</h2>
+                <h2 class="m-0 text-primary"><img src="~/assets/images/Lg.png" class="top-logo" style="height:60px;">Taʿallam</h2>
             </a>
-
-            <!-- Search Input -->
-            <div class="search-input me-4">
-                <form id="search" action="#">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-0" placeholder="Type Something" id="searchText" name="searchKeyword" onkeypress="handle" />
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
             <!-- Navbar Toggler Button -->
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -72,10 +59,11 @@
                     <!-- Home Link -->
                     <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Home</a>
 
+                    <a href="@Url.Action("Index", "Formations")" class="nav-item nav-link">Courses</a>
+
+                    <a href="@Url.Action("Index", "Actualites")" class="nav-item nav-link">Actualites</a>
                     <!-- À propos Link -->
                     <a href="@Url.Action("Index", "APropos")" class="nav-item nav-link">About</a>
-
-                    <a href="@Url.Action("Index", "Formations")" class="nav-item nav-link">Courses</a>
 
                     <!-- Conditional Profile Link -->
                     @if (Session["UserType"] != null)
@@ -90,7 +78,7 @@
                         }
                         else if (Session["UserType"].ToString() == "Admin")
                         {
-                            <a href="@Url.Action("Index", "AdminProfile")" class="nav-item nav-link">Profile</a>
+                            <a href="@Url.Action("Index", "Admins")" class="nav-item nav-link">Profile</a>
                         }
                     }
 
@@ -116,7 +104,7 @@
                             <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="userDropdown">
                                 <li>
                                     <a href="@Url.Action("Profile", "User")" class="dropdown-item">
-                                        <i class="bi bi-person me-2"></i>Account
+                                        <i class="bi bi-person me-2"></i>Certifications
                                     </a>
                                 </li>
                                 <li>
@@ -140,14 +128,6 @@
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         &copy; <a class="border-bottom" href="#">@DateTime.Now.Year - Taʿallam Projet</a>, All Right Reserved.
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
-                        </div>
                     </div>
                 </div>
             </div>

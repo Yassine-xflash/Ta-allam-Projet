@@ -1,0 +1,160 @@
+﻿@model Gestion_Centre_Formations.Models.Actualites
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section single-wrapper">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content Area -->
+            <div class="col-lg-9 col-md-12">
+                <div class="page-wrapper">
+                    <!-- Title Area -->
+                    <div class="blog-title-area text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center shadow-sm p-3 bg-light rounded">
+                                        <li class="breadcrumb-item">
+                                            <a href="@Url.Action("Index", "Home")" class="text-primary">
+                                                <i class="fa fa-home"></i> Home
+                                            </a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="@Url.Action("Index", "Actualites")" class="text-secondary">Actualites</a>
+                                        </li>
+                                        <li class="breadcrumb-item active text-dark" aria-current="page">@Model.Title</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4">@Model.Title</h3>
+                        <div class="blog-meta big-meta mt-2">
+                            <small><i class="fa fa-calendar"></i> @Model.Date.ToString("dd MMMM yyyy")</small> |
+                            <small><i class="fa fa-eye"></i> @Model.Views</small>
+                        </div>
+                    </div>
+                    <!-- End Title Area -->
+                    <!-- Featured Image -->
+                    <div class="single-post-media mt-4">
+                        @{
+                            var imageName = Model.Title.Replace(" ", "-").ToLower();
+                        }
+                        <img src="~/assets/images/Actualite/@(imageName).jpg" alt="@Model.Title" class="img-fluid rounded shadow">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="blog-content mt-4">
+                        <div class="content-section">
+                            <p>@Model.Content</p>
+                        </div>
+
+                        <!-- Dynamic Sections -->
+                        @if (Model.Sections != null && Model.Sections.Any())
+                        {
+                            foreach (var sectionA in Model.Sections)
+                            {
+                                <div class="content-section mt-4">
+                                    <h4 class="section-title"><strong>@sectionA.Title</strong></h4>
+                                    <p>@sectionA.Content</p>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <hr class="invis1">
+                </div>
+            </div>
+            <!-- End Main Content Area -->
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-12 mt-4 mt-lg-0">
+                <div class="sidebar">
+                    <div class="widget">
+                        <h4 class="widget-title">Most Popular</h4>
+                        <div class="blog-list-widget">
+                            <div class="list-group">
+                                @if (ViewBag.MostPopularActualites != null)
+                                {
+                                    foreach (var popularActualite in ViewBag.MostPopularActualites)
+                                    {
+                                        <a href="@Url.Action("Details", new { id = popularActualite.Id })"
+                                           class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex align-items-center">
+                                                @{
+                                                    var popularImageName = popularActualite.Title.Replace(" ", "-").ToLower();
+                                                }
+                                                <img src="~/assets/images/Actualite/@(popularImageName).jpg"
+                                                     alt="@popularActualite.Title"
+                                                     class="img-fluid rounded shadow me-3"
+                                                     style="width: 80px; height: 50px;">
+                                                <div>
+                                                    <h6 class="mb-1">@popularActualite.Title</h6>
+                                                    <small><i class="fa fa-calendar"></i> @popularActualite.Date.ToString("dd MMMM yyyy")</small>
+                                                    <small><i class="fa fa-eye"></i> @popularActualite.Views</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info text-center">
+                                        No popular actualités available.
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sidebar -->
+        </div>
+    </div>
+</section>
+
+<style>
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .blog-meta small {
+        font-size: 0.85rem;
+        color: #888;
+    }
+
+    .content-section {
+        line-height: 1.8;
+    }
+
+    .widget-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .display-3 {
+        font-size: 2.5rem;
+    }
+    .list-group-item img {
+        width: 80px;
+        height: 50px;
+        object-fit: cover;
+    }
+
+</style>

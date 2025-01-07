@@ -1,0 +1,221 @@
+﻿@model Gestion_Centre_Formations.Models.Payment
+
+@{
+    ViewBag.Title = "Payment Details";
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+}
+
+
+<style>
+    .containerPAY {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .invoice-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .invoice-title h2 {
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+        }
+
+        .invoice-title h4 {
+            font-size: 18px;
+            color: #555;
+            margin: 0;
+        }
+
+    .badge {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .bg-success {
+        background-color: #28a745;
+    }
+
+    .bg-warning {
+        background-color: #ffc107;
+    }
+
+    .bg-danger {
+        background-color: #dc3545;
+    }
+
+    .text-muted {
+        color: #666;
+    }
+
+    .text-white {
+        color: #fff;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .col-sm-6 {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+        .col-sm-6 h5 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .col-sm-6 p {
+            margin: 5px 0;
+        }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+    @@media print {
+        body * {
+            visibility: hidden;
+        }
+
+        .container, .container * {
+            visibility: visible;
+        }
+
+        .container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            box-shadow: none;
+            border: none;
+        }
+
+        .btn {
+            display: none;
+        }
+    }
+</style>
+
+<div class="containerPAY">
+    <div class="invoice-title">
+        <h2>TA'ALLAM Project</h2>
+        <h4>
+            Invoice @Model.Id
+            <span class="badge @(Model.PaymentStatus == "Accepting Approval" ? "bg-success" : Model.PaymentStatus == "Pending Approval" ? "bg-warning" : "bg-danger") text-white">
+                @Model.PaymentStatus
+            </span>
+        </h4>
+    </div>
+
+    <div class="text-muted">
+        <p>@(Model.Participant?.Nom ?? "N/A") @(Model.Participant?.Prenom ?? "N/A")</p>
+        <p><i class="uil uil-envelope-alt"></i> @(Model.Participant?.Email ?? "N/A")</p>
+        <p><i class="uil uil-phone"></i> @(Model.Participant?.NumTel ?? "N/A")</p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Billed To:</h5>
+            <p>@(Model.Formation?.Formateur?.Nom ?? "N/A") @(Model.Formation?.Formateur?.Prenom ?? "N/A")</p>
+            <p>@(Model.Formation?.Formateur?.Email ?? "N/A")</p>
+            <p>@(Model.Formation?.Formateur?.NumTel ?? "N/A")</p>
+        </div>
+        <div class="col-sm-6">
+            <h5>Invoice No:</h5>
+            <p>@Model.Id</p>
+            <h5>Invoice Date:</h5>
+            <p>@Model.PaymentDate.ToShortDateString()</p>
+            <h5>Payment Method:</h5>
+            <p>@Model.PaymentMethod</p>
+        </div>
+    </div>
+
+    <h5>Order Summary</h5>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Id</td>
+                    <td>
+                        <div>
+                            <h5>@(Model.Formation?.Titre ?? "N/A")</h5>
+                            <p class="text-muted">@(Model.Formation?.Categorie ?? "N/A")</p>
+                        </div>
+                    </td>
+                    <td>@(Model.Formation?.Prix.ToString("C") ?? "N/A")</td>
+                    <td>@(Model.Formation?.Prix.ToString("C") ?? "N/A")</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Tax (10%)</td>
+                    <td>@((Model.Formation?.Prix * 0.1)?.ToString("C") ?? "N/A")</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td><h4>@((Model.Formation?.Prix * 1.1)?.ToString("C") ?? "N/A")</h4></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-print-none">
+        <a href="javascript:window.print()" class="btn"><i class="fa fa-print"></i> Print</a>
+    </div>
+</div>

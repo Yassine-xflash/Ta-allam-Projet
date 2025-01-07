@@ -16,11 +16,68 @@ namespace Gestion_Centre_Formations.Controllers
         private Gestion_Centre_FormationsContext db = new Gestion_Centre_FormationsContext();
 
         // GET: Formations
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string category, double? minPrice, double? maxPrice, int? minDuration, int? maxDuration)
         {
-            var formations = db.Formations.Include(f => f.Formateur);
+            // Start with base query
+            var formations = db.Formations.Include(f => f.Formateur)
+                                          .Where(f => f.Supp == false) // Filter out formations marked for deletion
+                                          .AsQueryable();
+
+            // Search by title
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                formations = formations.Where(f => f.Titre.Contains(searchString));
+            }
+
+            // Filter by category
+            if (!string.IsNullOrEmpty(category))
+            {
+                formations = formations.Where(f => f.Categorie == category);
+            }
+
+            // Filter by price range
+            if (minPrice.HasValue)
+            {
+                formations = formations.Where(f => f.Prix >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                formations = formations.Where(f => f.Prix <= maxPrice.Value);
+            }
+
+            // Filter by duration range
+            if (minDuration.HasValue)
+            {
+                formations = formations.Where(f => f.Duration >= minDuration.Value);
+            }
+            if (maxDuration.HasValue)
+            {
+                formations = formations.Where(f => f.Duration <= maxDuration.Value);
+            }
+
+            // Get unique categories for dropdown
+            ViewBag.Categories = db.Formations.Where(f => f.Supp == false) // Only include non-deleted formations
+                                              .Select(f => f.Categorie)
+                                              .Distinct()
+                                              .ToList();
+
+            // Get price and duration ranges for filter inputs
+            ViewBag.MinPrice = db.Formations.Where(f => f.Supp == false).Min(f => f.Prix);
+            ViewBag.MaxPrice = db.Formations.Where(f => f.Supp == false).Max(f => f.Prix);
+            ViewBag.MinDuration = db.Formations.Where(f => f.Supp == false).Min(f => f.Duration);
+            ViewBag.MaxDuration = db.Formations.Where(f => f.Supp == false).Max(f => f.Duration);
+
+            // Pass current filter values to the view
+            ViewBag.SearchString = searchString;
+            ViewBag.SelectedCategory = category;
+            ViewBag.MinPriceFilter = minPrice;
+            ViewBag.MaxPriceFilter = maxPrice;
+            ViewBag.MinDurationFilter = minDuration;
+            ViewBag.MaxDurationFilter = maxDuration;
+
             return View(formations.ToList());
         }
+
 
         // GET: Formations/Details/5
         public ActionResult Details(int? id)
@@ -128,6 +185,21 @@ namespace Gestion_Centre_Formations.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Join(int courseId)
+        {
+            // Check if the user is logged in by verifying the session
+            if (Session["UserId"] != null)
+            {
+                // Get the logged-in user's ID from the session
+                int userId = Convert.ToInt32(Session["UserId"]);
+
+                // Redirect to the Payment action with both courseId and userId
+                return RedirectToAction("Index", "Payement", new { courseId, userId });
+            }
+
+            // If the user is not logged in, redirect to the Login page
+            return RedirectToAction("Login", "Authentification");
         }
     }
 }

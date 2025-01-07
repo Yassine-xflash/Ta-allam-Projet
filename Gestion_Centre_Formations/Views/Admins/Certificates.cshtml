@@ -1,0 +1,116 @@
+﻿@model Gestion_Centre_Formations.Models.CertificateView
+
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Certificates";
+}
+
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#">Certificates</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-inn-sp">
+            <div class="inn-title">
+                <h4>All Certificates</h4>
+            </div>
+            <div class="tab-inn">
+                <div class="table-responsive table-desi">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Message"]</div>
+                    }
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Error"]</div>
+                    }
+
+                    <h3>Certified Courses</h3>
+                    @if (Model.CertifiedCourses != null && Model.CertifiedCourses.Count > 0)
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Formateur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model.CertifiedCourses)
+                                {
+                                    <tr>
+                                        <td>@course.Titre</td>
+                                        <td>@course.Categorie</td>
+                                        <td>@course.Duration Hrs</td>
+                                        <td>$@course.Prix</td>
+                                        <td>@course.Formateur.Nom @course.Formateur.Prenom</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No certified courses found.</p>
+                    }
+
+                    <h3>Non-Certified Courses</h3>
+                    @if (Model.NonCertifiedCourses != null && Model.NonCertifiedCourses.Count > 0)
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Formateur</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model.NonCertifiedCourses)
+                                {
+                                    <tr>
+                                        <td>@course.Titre</td>
+                                        <td>@course.Categorie</td>
+                                        <td>@course.Duration Hrs</td>
+                                        <td>$@course.Prix</td>
+                                        <td>@course.Formateur.Nom @course.Formateur.Prenom</td>
+                                        <td>
+                                            @using (Html.BeginForm("CertifyCourse", "Admins", FormMethod.Post))
+                                            {
+                                                @Html.Hidden("id", course.FormationID)
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <i class="fa fa-check-circle"></i> Certify
+                                                </button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No non-certified courses found.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

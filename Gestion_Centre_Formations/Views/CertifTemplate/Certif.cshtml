@@ -1,0 +1,134 @@
+﻿@model Gestion_Centre_Formations.Models.Certificate
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="~/assets/css/Certif.css">
+
+</head>
+<body>
+        <div class="container pm-certificate-container">
+            <div class="outer-border"></div>
+            <div class="inner-border"></div>
+
+            <div class="pm-certificate-border col-xs-12">
+                <div class="pm-header-image text-center">
+                    <img src="~/assets/images/cerificate/header.png" alt="Header Image" class="pm-header-logo">
+                </div>
+                <div class="row pm-certificate-header">
+
+                </div>
+                <div class="pm-certificate-title cursive col-xs-12 text-center">
+                    <h2>Ta'allam Schools Certificate of Completion</h2>
+                </div>
+                <div class="row pm-certificate-body">
+
+                    <div class="pm-certificate-block">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
+                                    <span class="pm-name-text bold">@Model.Participant.Prenom @Model.Participant.Nom</span>
+                                </div>
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="pm-earned col-xs-8 text-center">
+                                    <span class="pm-earned-text padding-0 block cursive">has earned at</span>
+                                    <span class="pm-credits-text block bold sans">@Model.DateIssued.ToString("MMM dd, yyyy 'at' hh:mmtt 'UTC'")</span>
+                                </div>
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="col-xs-12"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="pm-course-title col-xs-8 text-center">
+                                    <span class="pm-earned-text block cursive">while completing the training course entitled</span>
+                                </div>
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="pm-course-title underline col-xs-8 text-center">
+                                    <span class="pm-credits-text block bold sans">@Model.Formation.Titre </span>
+                                </div>
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="pm-certificate-footer">
+                                <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                    <span class="pm-credits-text block sans">Ta'allam School District</span><br>
+                                    <span class="pm-empty-space block underline"><img src="~/assets/images/cerificate/signat.png" class="pm-signature" alt="Signature"></span>
+                                    <span class="bold block">Ta'allam Instructional Specialist , Staff Development</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <!-- LEAVE EMPTY -->
+                                    <img src="~/assets/images/cerificate/logo.png" class="pm-logo" alt="Logo">
+                                </div>
+                                <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                    <span class="pm-empty-space block underline"></span>
+                                    <span class="bold block">Certificate ID : @Model.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </body>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <div class="text-center">
+        <button class="btn btn-primary" onclick="downloadCertificate()">Download Certificate</button>
+    </div>
+    <script>
+        async function downloadCertificate() {
+            const certificate = document.getElementById('certificate');
+            const canvas = await html2canvas(certificate, { scale: 2 });
+            const imgData = canvas.toDataURL('image/png');
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('landscape');
+            const imgWidth = 297; // A4 width in mm
+            const pageHeight = 210; // A4 height in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+
+            let position = 0;
+
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            // Replace spaces with underscores in the title for the filename
+            const formationTitle = "@Model.Formation.Titre".replace(/\s+/g, '_');
+            const fileName = `${formationTitle}ta'allam_certificate.pdf`;
+
+            pdf.save(fileName);
+        }
+    </script>
+</html>

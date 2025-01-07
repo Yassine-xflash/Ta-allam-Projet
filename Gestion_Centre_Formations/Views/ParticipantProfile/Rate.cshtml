@@ -1,0 +1,146 @@
+﻿@model Gestion_Centre_Formations.Models.FormationParticipant
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Rate this Course</h2>
+                    <h5 class="text-center text-muted mb-5">"@Model.Formation.Titre"</h5>
+                    @using (Html.BeginForm("SubmitRating", "ParticipantProfile", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.FormationParticipantID)
+
+                        <div class="text-center mb-5">
+                            <div class="rating d-flex justify-content-center">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="star mx-1" data-rating="@i">★</span>
+                                }
+                            </div>
+                            <input type="hidden" id="selectedRating" name="rating" value="0" />
+                        </div>
+
+                        <div class="form-group mb-5 text-center">
+                            <label for="comment" class="form-label fw-bold">Your Review</label>
+                            <textarea class="form-control border-primary rounded-3 shadow-sm w-100 mx-auto" id="comment" name="comment" rows="4" placeholder="Write your feedback here..." required></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary px-5 py-2 fw-bold rounded-pill">Submit Rating</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('selectedRating');
+
+            // Add click event listeners to stars
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function () {
+                    const rating = index + 1; // Determine the clicked star's rating
+                    ratingInput.value = rating; // Update hidden input with the selected rating
+
+                    // Highlight all stars up to the selected one
+                    stars.forEach((s, i) => {
+                        s.classList.toggle('active', i < rating);
+                        s.style.color = i < rating ? '#ffc107' : '#d4d4d4';
+                    });
+                });
+
+                // Add hover effect for better UX
+                star.addEventListener('mouseenter', function () {
+                    stars.forEach((s, i) => {
+                        s.style.color = i <= index ? '#ffc107' : '#d4d4d4';
+                    });
+                });
+
+                star.addEventListener('mouseleave', function () {
+                    const activeRating = parseInt(ratingInput.value, 10) || 0;
+                    stars.forEach((s, i) => {
+                        s.style.color = i < activeRating ? '#ffc107' : '#d4d4d4';
+                    });
+                });
+            });
+
+            // Initialize stars based on existing rating (if any)
+            const initialRating = parseInt(ratingInput.value, 10) || 0;
+            stars.forEach((star, i) => {
+                if (i < initialRating) {
+                    star.classList.add('active');
+                    star.style.color = '#ffc107';
+                }
+            });
+        });
+    </script>
+
+<style>
+    .rating {
+        font-size: 2.5rem;
+        cursor: pointer;
+    }
+
+    .star {
+        color: #d4d4d4;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+            transform: scale(1.2);
+        }
+
+            .star:hover ~ .star {
+                color: #d4d4d4;
+                transform: scale(1);
+            }
+
+    .card {
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+    }
+
+    .card-body {
+        border-radius: 1rem;
+        background: #ffffff;
+    }
+
+    textarea:focus {
+        border-color: #ffc107 !important;
+        box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    }
+
+    button {
+        background: #007bff;
+        border: none;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+        button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+    .btn-primary {
+        box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.4);
+    }
+
+    .form-label {
+        font-size: 1.2rem;
+    }
+
+    .form-control {
+        font-size: 1rem;
+    }
+</style>

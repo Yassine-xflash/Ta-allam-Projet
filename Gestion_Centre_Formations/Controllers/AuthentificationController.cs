@@ -134,7 +134,7 @@ namespace Gestion_Centre_Formations.Controllers
                         Session["UserType"] = "Admin";
                         Session["Nom"] = admin.Nom;
                         Session["Prenom"] = admin.Prenom;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Admins");
                     }
                     else
                     {

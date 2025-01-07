@@ -15,27 +15,32 @@ namespace Gestion_Centre_Formations.Controllers
         public ActionResult Index()
         {
 
-            var FormationsCount = db.Formations.Count();
-            var participantsCount = db.Participants.Count();
-            var FormateursCiunt = db.Formateurs.Count();
-            var averageRating = 4.8;
-
-            // Récupérer les formations les plus populaires
-            var popularFormations = db.Formations
-                .OrderByDescending(f => f.FormationParticipants.Count())
-                .Take(3)
-                .ToList();
-
-            // Préparer les données pour la vue
-            var viewModel = new AboutPage
+            var aboutPage = new AboutPage
             {
-                FormationsCount = FormationsCount,
-                ParticipantsCount = participantsCount,
-                AverageRating = averageRating,
-                PopularFormations = popularFormations
+                FormationsCount = db.Formations.Count(),
+                ParticipantsCount = db.Participants.Count(),
+                FormateursCount = db.Formateurs.Count(),
+                AverageRating = db.FormationParticipants
+            .Where(fp => fp.Rating > 0)
+            .Average(fp => (double?)fp.Rating) ?? 0.0,
+                PopularFormations = db.Formations
+            .OrderByDescending(f => f.FormationParticipants.Count())
+            .Take(3)
+            .ToList(),
+                RecentReviews = db.FormationParticipants
+            .Where(fp => !string.IsNullOrEmpty(fp.Comment))
+            .OrderByDescending(fp => fp.FormationParticipantID)
+            .Take(5)
+            .Select(fp => new ReviewViewModel
+            {
+                ParticipantName = fp.Participant.Nom + " " + fp.Participant.Prenom,
+                Comment = fp.Comment,
+                Rating = fp.Rating
+            })
+            .ToList() ?? new List<ReviewViewModel>()
             };
 
-            return View(viewModel);
+            return View(aboutPage);
         }
     }
 }

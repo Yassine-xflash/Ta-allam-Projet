@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Gestion_Centre_Formations.Models.ReviewView>
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Reviews";
+}
+
+
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#">Reviews</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-inn-sp">
+            <div class="inn-title">
+                <h4>All Reviews</h4>
+            </div>
+            <div class="tab-inn">
+                <div class="table-responsive table-desi">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Message"]</div>
+                    }
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Error"]</div>
+                    }
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Formation</th>
+                                <th>Participant</th>
+                                <th>Rating</th>
+                                <th>Comment</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var review in Model)
+                            {
+                                <tr>
+                                    <td>@review.FormationTitle</td>
+                                    <td>@review.ParticipantName</td>
+                                    <td>
+                                        @if (review.Rating == 0)
+                                        {
+                                            <span class="text-muted">[Cleared]</span>
+                                        }
+                                        else
+                                        {
+                                            @review.Rating
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (string.IsNullOrEmpty(review.Comment))
+                                        {
+                                            <span class="text-muted">[Cleared]</span>
+                                        }
+                                        else
+                                        {
+                                            @review.Comment
+                                        }
+                                    </td>
+                                    <td>
+                                        <form action="@Url.Action("DeleteReview", "Admins")" method="post" style="display:inline;">
+                                            <input type="hidden" name="id" value="@review.FormationParticipantID" />
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to clear this review?');">
+                                                Clear Review
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                            @if (!Model.Any())
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">No reviews found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

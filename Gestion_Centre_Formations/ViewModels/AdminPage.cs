@@ -15,6 +15,7 @@ namespace Gestion_Centre_Formations.Models
         public IEnumerable<Participant> Participants { get; set; }
         public IEnumerable<Formation> Formations { get; set; }
         public IEnumerable<Formateur> Formateurs { get; set; }
+        public IEnumerable<Certificate> Certificates { get; set; }
 
         // Properties for the form
         [Required]
@@ -49,5 +50,7 @@ namespace Gestion_Centre_Formations.Models
 
         // Formateur-specific properties
         public string Specialisation { get; set; }
+
+        public int PendingPaymentsCount { get; set; }
     }
 }

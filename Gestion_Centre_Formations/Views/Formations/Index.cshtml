@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Courses";
 }
+
 <div class="container-fluid bg-primary py-5 mb-5 page-header">
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -19,10 +20,46 @@
         </div>
     </div>
 </div>
+
 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
     <h6 class="section-title bg-white text-center text-primary px-3">Latest Courses</h6>
     <h1 class="mb-5">Study With Us</h1>
 </div>
+
+<!-- Search and Filters Form -->
+<div class="col-12 d-flex justify-content-center align-items-center">
+    <form action="@Url.Action("Index", "Formations")" method="get" class="row g-3 w-80" id="filterForm">
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input type="text" name="searchString" class="form-control" placeholder="Search for courses..."
+                       value="@Request.QueryString["searchString"]">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="number" name="minPrice" class="form-control" placeholder="Min Price"
+                   value="@Request.QueryString["minPrice"]"
+                   min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice">
+        </div>
+
+        <div class="col-md-2">
+            <input type="number" name="maxPrice" class="form-control" placeholder="Max Price"
+                   value="@Request.QueryString["maxPrice"]"
+                   min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice">
+        </div>
+
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1 d-flex align-items-center">
+                <i class="bi bi-funnel me-2"></i>Apply
+            </button>
+            <button type="button" class="btn btn-outline-secondary d-flex align-items-center" id="clearFiltersBtn">
+                <i class="bi bi-x-circle me-2"></i>Clear
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Courses Section -->
 <section class="section courses" id="courses">
     <div class="container">
         <ul class="event_filter">
@@ -38,39 +75,44 @@
         </ul>
 
         <div class="row event_box">
-            @foreach (var course in Model)
+            @foreach (var course in Model.Where(f => f.Supp == false))
             {
-                <div class="col-lg-4 col-md-6 wow event_outer fadeInUp @course.Categorie.ToLower()" data-wow-delay="0.1s">
-                    <div class="course-item bg-light">
-                        <div class="position-relative overflow-hidden">
-                            <a href="#"><img class="img-fluid" src="~/wwwroot/images/course-01.jpg" alt="@course.Titre"></a>
-                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px;">Join Now</a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">$@course.Prix</h3>
-
-                            <h5 class="mb-4">@course.Titre</h5>
-                        </div>
-                        <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2">
-                                <i class="fa fa-user-tie text-primary me-2"></i>@course.Formateur.Nom @course.Formateur.Prenom
-                            </small>
-                            <small class="flex-fill text-center border-end py-2">
-                                <i class="fa fa-clock text-primary me-2"></i>@course.Duration Hrs
-                            </small>
-                            <small class="flex-fill text-center py-2">
-                                <i class="fa fa-user text-primary me-2"></i>@course.FormationParticipants Students
-                            </small>
+            <div class="col-lg-4 col-md-6 wow event_outer fadeInUp @course.Categorie.ToLower()" data-wow-delay="0.1s">
+                <div class="course-item bg-light hover-lift">
+                    <div class="position-relative overflow-hidden">
+                        @{
+                            var imageName = course.Titre.Replace(" ", "-").ToLower();
+                        }
+                        <a href="#"><img class="img-fluid" src="~/assets/images/course/@(imageName).jpg" alt="@course.Titre"></a>
+                        <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                            <a href="@Url.Action("Join", "Formations", new { courseId = course.FormationID })"
+                               class="flex-shrink-0 btn btn-sm btn-primary px-3"
+                               style="border-radius: 30px;">Join Now</a>
                         </div>
                     </div>
+                    <div class="text-center p-4 pb-0">
+                        <h3 class="mb-0">$@course.Prix</h3>
+                        <h5 class="mb-4">@course.Titre</h5>
+                    </div>
+                    <div class="d-flex border-top">
+                        <small class="flex-fill text-center border-end py-2">
+                            <i class="fa fa-user-tie text-primary me-2"></i>@course.Formateur.Nom @course.Formateur.Prenom
+                        </small>
+                        <small class="flex-fill text-center border-end py-2">
+                            <i class="fa fa-clock text-primary me-2"></i>@course.Duration Hrs
+                        </small>
+                        <small class="flex-fill text-center py-2">
+                            <i class="fa fa-user text-primary me-2"></i>@course.FormationParticipants Students
+                        </small>
+                    </div>
                 </div>
+            </div>
             }
         </div>
     </div>
 </section>
 
+<!-- Styles -->
 <style>
     .hover-lift {
         transition: transform 0.3s ease-in-out;
@@ -82,9 +124,27 @@
         }
 </style>
 
-<!-- Include Bootstrap and Bootstrap Icons -->
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- 2. Include Isotope.js (This must come after jQuery) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialize Isotope for filtering
+        var $grid = $('.event_box').isotope({
+            itemSelector: '.event_outer',
+            layoutMode: 'fitRows'
+        });
 
+        // Filter items on button click
+        $('.event_filter a').on('click', function () {
+            var filterValue = $(this).attr('data-filter');
+            $grid.isotope({ filter: filterValue });
+        });
+
+        // Clear filters
+        $('#clearFiltersBtn').on('click', function () {
+            $('#filterForm')[0].reset();
+            window.location.href = '@Url.Action("Index", "Formations")';
+        });
+    });
+</script>

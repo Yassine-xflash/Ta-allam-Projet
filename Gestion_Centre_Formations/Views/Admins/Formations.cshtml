@@ -4,7 +4,19 @@
     ViewBag.Title = "Formations";
     Layout = "~/Views/Shared/_HeaderPanel.cshtml";
 }
-
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#">Course Details</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
 <div class="sb2-2-3">
     <div class="row">
         <div class="col-md-12">
@@ -46,7 +58,7 @@
                                             <span class="label label-success">Active</span>
                                         </td>
                                         <td>
-                                            <a href="admin-student-details.html" class="ad-st-view">View</a>
+                                            <a href="@Url.Action("EditFormation", "Admins", new { id = formation.FormationID })" class="ad-st-view">View</a>
                                         </td>
                                         <td>
                                             <a href="@Url.Action("EditFormation", "Admins", new { id = formation.FormationID })" class="ad-st-view">Edit</a>

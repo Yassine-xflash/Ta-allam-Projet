@@ -1,0 +1,193 @@
+﻿@model Gestion_Centre_Formations.Models.ActualitesPage
+
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Edit Actualite";
+}
+
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#">Edit Actualites</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+
+<!-- Edit Actualite Form -->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="sb2-2-add-blog sb2-2-1">
+                    <h2>Edit Actualite</h2>
+                    <div class="box-inn-sp">
+                        <div class="inn-title">
+                            <h4>Actualite Information</h4>
+                        </div>
+                        <div class="bor">
+                            @using (Html.BeginForm("EditActualite", "Admins", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.Id) <!-- Hidden field for Id -->
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        @Html.TextBoxFor(model => model.Title, new { @class = "validate", id = "edit-title" })
+                                        <label for="edit-title">Actualite Title</label>
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-field col s12">
+                                        @Html.TextAreaFor(model => model.Content, new { @class = "materialize-textarea", id = "edit-content" })
+                                        <label for="edit-content">Actualite Description</label>
+                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="file-field input-field col s12">
+                                        <div class="btn admin-upload-btn">
+                                            <span>Upload New Image</span>
+                                            @Html.TextBoxFor(model => model.ImageFile, new { type = "file", id = "edit-image-file", accept = ".jpg" })
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" placeholder="Upload new actualite image (only .jpg)">
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <!-- Sections -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Sections</h4>
+                                        <div id="sections-container">
+                                            @if (Model.Sections != null && Model.Sections.Any())
+                                            {
+                                                int index = 0; // Manually track the index
+                                                foreach (var sectionA in Model.Sections)
+                                                {
+                                                    <div class="section" data-index="@index">
+                                                        <h5>Section @(index + 1)</h5>
+                                                        <div class="row">
+                                                            <div class="input-field col s12">
+                                                                <input type="text" name="Sections[@(index)].Title" value="@sectionA.Title" class="validate" />
+                                                                <label>Section Title</label>
+                                                            </div>
+                                                            <div class="input-field col s12">
+                                                                <textarea name="Sections[@(index)].Content" class="materialize-textarea">@Html.Raw(sectionA.Content)</textarea>
+                                                                <label>Section Content</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="input-field col s12">
+                                                                <button type="button" class="waves-effect waves-light btn red remove-section">Remove Section</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    index++; // Increment the index for the next iteration
+                                                }
+                                            }
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <button type="button" id="add-section" class="waves-effect waves-light btn">Add Section</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button type="submit" class="waves-effect waves-light btn-large">Save Changes</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Display Current Image -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-inn-sp">
+            <div class="inn-title">
+                <h4>Current Image</h4>
+            </div>
+            <div class="bor">
+                <span class="list-img">
+                    @if (Model.Actualites != null && Model.Actualites.Any())
+                    {
+                        var actualite = Model.Actualites.FirstOrDefault();
+                        if (actualite != null)
+                        {
+                            var imageName = actualite.Title.Replace(" ", "-").ToLower();
+                            <div style="width: 300px; height: 300px; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                <img src="~/assets/images/Actualite/@(imageName).jpg" alt="Current Image for @actualite.Title" style="width: 100%; height: 100%; object-fit: cover;" />
+                            </div>
+                        }
+                        else
+                        {
+                            <span>No Image Available (actualite is null)</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>No Image Available (Actualites is null or empty)</span>
+                    }
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Function to add a new section
+        function addSection(index) {
+            var sectionHtml = `
+                <div class="section" data-index="${index}">
+                    <h5>Section ${index + 1}</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" name="Sections[${index}].Title" class="validate" required />
+                            <label>Section Title</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea name="Sections[${index}].Content" class="materialize-textarea" required></textarea>
+                            <label>Section Content</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button type="button" class="waves-effect waves-light btn red remove-section">Remove Section</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $("#sections-container").append(sectionHtml);
+        }
+
+        // Add new section when the "Add Section" button is clicked
+        $("#add-section").click(function () {
+            var index = $(".section").length;
+            addSection(index);
+        });
+
+        // Remove section when the "Remove Section" button is clicked
+        $(document).on("click", ".remove-section", function () {
+            $(this).closest(".section").remove();
+        });
+    });
+</script>

@@ -1,0 +1,99 @@
+﻿@model Gestion_Centre_Formations.Models.ActualitesPage
+@{
+    Layout = "~/Views/Shared/_HeaderPanel.cshtml";
+    ViewBag.Title = "Actualites";
+}
+
+<!-- Breadcrumbs -->
+<div class="sb2-2-2">
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active-bre">
+            <a href="#">Actualites</a>
+        </li>
+        <li class="page-back">
+            <a href="@Url.Action("Index", "Admins")"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+        </li>
+    </ul>
+</div>
+
+<!-- Actualites Table -->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>All Actualites</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Date</th>
+                                    <th>Views</th>
+                                    <th>Edit</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Actualites)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>
+                                            <span class="list-img">
+                                                @{
+                                                    var imageName = item.Title.Replace(" ", "-").ToLower();
+                                                }
+                                                <img src="~/assets/images/Actualite/@(imageName).jpg" alt="Image for @item.Title" class="img-responsive" />
+                                            </span>
+                                        </td>
+                                        <td>@item.Title</td>
+                                        <td>@item.Content</td>
+                                        <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                                        <td>@item.Views</td>
+                                        <td>
+                                            <a href="@Url.Action("EditActualite", "Admins", new { id = item.Id })" class="ad-st-view">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("EditActualite", "Admins", new { id = item.Id })" class="ad-st-view">View</a>
+                                            <a href="@Url.Action("DeleteActualite", "Admins", new { id = item.Id })" class="ad-st-view delete-link" data-id="@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Add confirmation dialog for delete links
+        $(".delete-link").click(function (e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            var deleteUrl = $(this).attr("href"); // Get the delete URL
+            var itemId = $(this).data("id"); // Get the item ID
+
+            // Show confirmation dialog
+            if (confirm("Are you sure you want to delete this item?")) {
+                // If confirmed, redirect to the delete URL
+                window.location.href = deleteUrl;
+            }
+        });
+    });
+</script>

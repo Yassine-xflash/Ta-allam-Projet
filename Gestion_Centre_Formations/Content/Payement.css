@@ -1,149 +1,90 @@
-/* Container Styles */
-.payment-container {
-    width: 100%;
-    max-width: 450px;
-    min-height: 251px;
-    padding: 25px;
-    margin: 0 auto;
-    perspective: 1000px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+.card {
+    border: none;
 }
 
-    .payment-container:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-
-/* Form Layout */
-.payment-form-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    grid-template-areas:
-        "name name"
-        "number number"
-        "expiration security";
-    max-width: 450px;
-    padding: 25px;
-    background: #ffffff;
-    border-radius: 10px;
+.card-header {
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: none;
 }
 
-.payment-field-container {
-    position: relative;
-    margin-bottom: 15px;
+.btn-light:focus {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+    box-shadow: 0 0 0 0.2rem rgba(216,217,219,.5);
 }
 
-/* Input Styling */
-.input {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 15px;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    background-color: #fafafa;
-    color: #333;
-}
-
-    .input:focus {
-        border-color: #2196F3;
-        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
-        outline: none;
-        background-color: #ffffff;
-    }
-
-/* Label Styling */
-label {
-    display: block;
-    margin-bottom: 8px;
+.form-control {
+    height: 50px;
+    border: 2px solid #eee;
+    border-radius: 6px;
     font-size: 14px;
-    font-weight: 500;
-    color: #424242;
 }
 
-/* Credit Card Icon */
-.payment-ccicon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 25px;
-    width: auto;
-    pointer-events: none;
-}
-
-/* Generate Card Button */
-#payment-generatecard {
-    position: absolute;
-    right: 10px;
-    top: -20px;
-    font-size: 13px;
-    color: #2196F3;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-    #payment-generatecard:hover {
-        background-color: rgba(33, 150, 243, 0.1);
+    .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #039be5;
+        outline: 0;
+        box-shadow: none;
     }
 
-/* Credit Card Display */
-.creditcard {
-    width: 100%;
-    max-width: 450px;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+.input {
+    position: relative;
 }
 
-    .creditcard svg#cardfront,
-    .creditcard svg#cardback {
-        width: 100%;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.3s ease;
-    }
-
-    .creditcard .front,
-    .creditcard .back {
+    .input i {
         position: absolute;
-        width: 100%;
-        max-width: 450px;
-        backface-visibility: hidden;
-        -webkit-font-smoothing: antialiased;
-        color: #47525d;
+        top: 16px;
+        left: 11px;
+        color: #989898;
     }
 
-    .creditcard .back {
-        transform: rotateY(180deg);
+    .input input {
+        text-indent: 25px;
     }
 
-    .creditcard.flipped {
-        transform: rotateY(180deg);
-    }
+.card-text {
+    font-size: 13px;
+    margin-left: 6px;
+}
 
-/* Responsive Adjustments */
-@media (max-width: 576px) {
-    .payment-form-container {
-        grid-template-areas:
-            "name name"
-            "number number"
-            "expiration expiration"
-            "security security";
-        padding: 15px;
-    }
+.certificate-text {
+    font-size: 12px;
+}
 
-    .input {
-        font-size: 14px;
-        padding: 10px 12px;
-    }
 
-    label {
-        font-size: 13px;
-    }
+.billing {
+    font-size: 11px;
+}
+
+.super-price {
+    top: 0px;
+    font-size: 22px;
+}
+
+.super-month {
+    font-size: 11px;
+}
+
+
+.line {
+    color: #bfbdbd;
+}
+
+.free-button {
+    background: #1565c0;
+    height: 52px;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+
+.payment-card-body {
+    flex: 1 1 auto;
+    padding: 24px 1rem !important;
 }

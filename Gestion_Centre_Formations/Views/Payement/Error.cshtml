@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Error";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .error-message {
+            max-width: 500px;
+            padding: 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        setTimeout(function () {
+            window.history.back();
+        }, 5000);
+    </script>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-message">
+            <h3>Error Occurred</h3>
+            <p>@ViewBag.ErrorMessage ?? "An error occurred while processing your request. You will be redirected shortly."</p>
+        </div>
+    </div>
+</body>
+</html>
