@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
+using System.IO;
 
 namespace Gestion_Centre_Formations.Controllers
 {
@@ -17,11 +18,13 @@ namespace Gestion_Centre_Formations.Controllers
         // GET: FormateurProfile
         public ActionResult Index()
         {
-            if (Session["UserType"] == null) {
+            if (Session["UserType"] == null)
+            {
                 return RedirectToAction("Login", "Authentification");
             }
-            else if (Session["UserType"].ToString() != "Formateur") {
-            return RedirectToAction("Index", "Home");
+            else if (Session["UserType"].ToString() != "Formateur")
+            {
+                return RedirectToAction("Index", "Home");
             }
 
             var formateurId = int.Parse(Session["UserId"].ToString());
@@ -47,92 +50,132 @@ namespace Gestion_Centre_Formations.Controllers
         // GET: FormateurProfile/Create
         public ActionResult Create()
         {
-            if (Session["UserType"] == null)
+            if (Session["UserType"] == null || Session["UserType"].ToString() != "Formateur")
             {
                 return RedirectToAction("Login", "Authentification");
             }
-            else if (Session["UserType"].ToString() != "Formateur")
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            // Récupérer la liste des formateurs pour le dropdown
-            ViewBag.FormateurID = new SelectList(db.Formateurs, "FormateurID", "Nom");
+
+            // No need to fetch formateurs since it's already tied to the logged-in formateur
             return View();
         }
 
         // POST: FormateurProfile/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FormationID,Titre,Description,Categorie,Duration,Prix")] Formation formation)
+        public ActionResult Create(FormationsPage model)
         {
-            // Assume you have a way to get the logged-in Formateur's ID (e.g., from session, claims, etc.)
-            int? loggedInFormateurId = int.Parse(Session["UserId"].ToString()); // Replace with your method to fetch the ID.
-
+            int? loggedInFormateurId = int.Parse(Session["UserId"].ToString());
             if (loggedInFormateurId == null)
             {
-                // If the ID cannot be retrieved, deny access
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "You must be logged in as a Formateur to create a formation.");
             }
 
-            // Set the FormateurID for the Formation
-            formation.FormateurID = loggedInFormateurId.Value;
-
             if (ModelState.IsValid)
             {
+                if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
+                {
+                    var fileExtension = Path.GetExtension(model.ImageFile.FileName);
+                    var fileName = model.Titre + fileExtension;
+                    var path = Path.Combine(Server.MapPath("~/assets/images/course"), fileName);
+                    model.ImageFile.SaveAs(path);
+                }
+                else
+                {
+                    Console.WriteLine("No image saved'");
+                }
+
+
+                var formation = new Formation
+                {
+                    Titre = model.Titre,
+                    Categorie = model.Categorie,
+                    Description = model.Description,
+                    FormateurID = loggedInFormateurId.Value,
+                    Prix = model.Prix,
+                    Duration = model.Duration,
+                    Supp = false
+                };
+
                 db.Formations.Add(formation);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { formateurId = formation.FormateurID });
+                return RedirectToAction("Index");
             }
 
-            // If invalid, return to the view
-            return View(formation);
+            return View(model);
         }
+
 
 
 
 
         // GET: FormateurProfile/Edit/5
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            if (Session["UserType"] == null)
+            if (Session["UserType"] == null || Session["UserType"].ToString() != "Formateur")
             {
                 return RedirectToAction("Login", "Authentification");
             }
-            else if (Session["UserType"].ToString() != "Formateur")
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
-            var id = int.Parse(Session["UserId"].ToString());
-            var formation = db.Formations.FirstOrDefault(f => f.FormateurID == id);
-
+            int formateurId = int.Parse(Session["UserId"].ToString());
+            var formation = db.Formations.FirstOrDefault(f => f.FormationID == id && f.FormateurID == formateurId);
             if (formation == null)
             {
                 return HttpNotFound();
             }
 
-            // Populate the dropdown for Formateur selection
-            ViewBag.FormateurID = new SelectList(db.Formateurs, "FormateurID", "Nom", formation.FormateurID);
-            return View(formation);
-        }
+            var model = new FormationsPage
+            {
+                Titre = formation.Titre,
+                Description = formation.Description,
+                Categorie = formation.Categorie,
+                Duration = formation.Duration,
+                Prix = formation.Prix,
+                FormateurID = formation.FormateurID
+            };
 
+            return View(model);
+        }
 
         // POST: FormateurProfile/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FormationID,Titre,Description,Categorie,Duration,Prix,FormateurID")] Formation formation)
+        public ActionResult Edit(int id, FormationsPage model)
         {
+            int formateurId = int.Parse(Session["UserId"].ToString());
             if (ModelState.IsValid)
             {
+                var formation = db.Formations.FirstOrDefault(f => f.FormationID == id && f.FormateurID == formateurId);
+                if (formation == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
+                {
+                    var fileExtension = Path.GetExtension(model.ImageFile.FileName);
+                    var fileName = model.Titre + fileExtension;
+                    var path = Path.Combine(Server.MapPath("~/assets/images/course"), fileName);
+                    model.ImageFile.SaveAs(path);
+
+
+                }
+
+                formation.Titre = model.Titre;
+                formation.Description = model.Description;
+                formation.Categorie = model.Categorie;
+                formation.Duration = model.Duration;
+                formation.Prix = model.Prix;
+
                 db.Entry(formation).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { formateurId = formation.FormateurID });
+                return RedirectToAction("Index");
             }
 
-            // Récupérer la liste des formateurs pour le dropdown
-            ViewBag.FormateurID = new SelectList(db.Formateurs, "FormateurID", "Nom", formation.FormateurID);
-            return View(formation);
+            return View(model);
         }
+
+
+
 
         // POST: FormateurProfile/Delete/5
         [HttpPost]
@@ -184,6 +227,21 @@ namespace Gestion_Centre_Formations.Controllers
 
             return View(viewModel);
         }
+
+        public JsonResult GetFormationsParticipantsCount()
+        {
+            var formateurId = int.Parse(Session["UserId"].ToString());
+            var formationsData = db.Formations
+                .Where(f => f.FormateurID == formateurId)
+                .Select(f => new
+                {
+                    f.Titre,
+                    ParticipantsCount = f.FormationParticipants.Count()
+                }).ToList();
+
+            return Json(formationsData, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 

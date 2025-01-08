@@ -21,4 +21,10 @@ namespace Gestion_Centre_Formations.Models
         //navigation pour le tableau de jointure FormationParticipants
         public ICollection<FormationParticipant> FormationParticipants { get; set; }
     }
+    public class ParticipantProfileViewModel
+    {
+        public Participant Participant { get; set; }
+        public List<Formation> Formations { get; set; }
+
+    }
 }

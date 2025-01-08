@@ -20,6 +20,7 @@ namespace Gestion_Centre_Formations.Controllers
         {
             // Start with base query
             var formations = db.Formations.Include(f => f.Formateur)
+                                           .Include(f => f.FormationParticipants)
                                           .Where(f => f.Supp == false) // Filter out formations marked for deletion
                                           .AsQueryable();
 
@@ -200,6 +201,25 @@ namespace Gestion_Centre_Formations.Controllers
 
             // If the user is not logged in, redirect to the Login page
             return RedirectToAction("Login", "Authentification");
+        }
+        [HttpPost]
+        public ActionResult GetCoursesByIds(List<int> ids)
+        {
+            var courses = db.Formations
+                .Where(f => ids.Contains(f.FormationID))
+                .Select(f => new
+                {
+                    f.FormationID,
+                    f.Titre,
+                    f.Description,
+                    f.Categorie,
+                    f.Formateur,
+                    f.Duration,
+                    f.Prix
+                })
+                .ToList();
+
+            return Json(courses, JsonRequestBehavior.AllowGet);
         }
     }
 }

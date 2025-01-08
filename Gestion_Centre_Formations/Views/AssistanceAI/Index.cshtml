@@ -1,0 +1,168 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AI Assistance";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Demander à l'IA</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="userQuery" class="form-label">Que souhaitez-vous apprendre ?</label>
+                        <textarea id="userQuery" class="form-control" rows="5"
+                                  placeholder="Exemple: Je veux devenir développeur web full-stack..."></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button onclick="getRecommendations()" class="btn btn-primary">
+                            <i class="bi bi-send me-2"></i>Obtenir des recommandations
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="recommendationsContainer" style="display: none;" class="mt-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">Votre Parcours d'Apprentissage</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="roadmapContent" class="mb-4"></div>
+
+                        <h5 class="text-primary mb-3">Formations Recommandées</h5>
+                        <div id="recommendedCourses" class="row row-cols-1 row-cols-md-2 g-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+    .card-header {
+        border-bottom: 0;
+    }
+
+    .card-footer {
+        border-top: 0;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+    }
+
+    .text-muted {
+        font-size: 0.9rem;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    #roadmapContent {
+        line-height: 1.6;
+        white-space: pre-line;
+    }
+</style>
+    <script>
+        function getRecommendations() {
+            const userQuery = document.getElementById('userQuery').value;
+            if (!userQuery.trim()) {
+                alert('Veuillez entrer ce que vous souhaitez apprendre');
+                return;
+            }
+
+            // Show loading state
+            const recommendationsContainer = document.getElementById('recommendationsContainer');
+            const roadmapContent = document.getElementById('roadmapContent');
+
+            recommendationsContainer.style.display = 'block';
+            roadmapContent.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Génération des recommandations en cours...</p></div>';
+
+            fetch('@Url.Action("GetRecommendations", "AssistanceAI")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userQuery: userQuery })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("data", data);
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                // Display roadmap
+                roadmapContent.innerHTML = data.Roadmap.replace(/\n/g, '<br>');
+
+                // Load recommended courses
+                return fetch('@Url.Action("GetCoursesByIds", "Formations")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data.RecommendedCourseIds)
+                });
+            })
+            .then(response => response.json())
+            .then(courses => {
+                const coursesContainer = document.getElementById('recommendedCourses');
+                coursesContainer.innerHTML = '';
+
+                courses.forEach(course => {
+                    coursesContainer.innerHTML += `
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0 hover-lift">
+                                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">${course.Titre}</h5>
+                                    <span class="badge bg-light text-primary">${course.Categorie}</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text text-muted">${course.Description}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <small class="text-muted">
+                                                <i class="bi bi-clock me-2"></i>Durée: ${course.Duration} hours
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="bi bi-person-workspace me-2"></i>Formateur: ${course.Formateur.Nom} ${course.Formateur.Prenom}
+                                            </small>
+                                        </div>
+                                        <h4 class="text-success mb-0">${course.Prix} dhs</h4>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="bi bi-cart-plus me-2"></i>S'inscrire
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            })
+            .catch(error => {
+                roadmapContent.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Erreur: ${error.message}
+                    </div>`;
+            });
+        }
+    </script>

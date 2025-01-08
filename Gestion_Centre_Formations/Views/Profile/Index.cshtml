@@ -1,0 +1,85 @@
+﻿
+@model Gestion_Centre_Formations.Models.ParticipantProfileViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Profile";
+}
+
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Profile</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Profile</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow hover-lift">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">@Model.Participant.Prenom @Model.Participant.Nom</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- User Class Fields -->
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fa fa-user text-primary me-3 fa-2x"></i>
+                        <span><strong>First Name:</strong> @Model.Participant.Prenom</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fa fa-user text-primary me-3 fa-2x"></i>
+                        <span><strong>Last Name:</strong> @Model.Participant.Nom</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fa fa-envelope text-primary me-3 fa-2x"></i>
+                        <span><strong>Email:</strong> @Model.Participant.Email</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fa fa-phone text-primary me-3 fa-2x"></i>
+                        <span><strong>Phone Number:</strong> @Model.Participant.NumTel</span>
+                    </div>
+
+                    <!-- Participant Class Fields -->
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fa fa-calendar text-primary me-3 fa-2x"></i>
+                        <span><strong>Date Inscription:</strong> @Model.Participant.DateInscription.ToShortDateString()</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fa fa-book text-primary me-3 fa-2x"></i>
+                        <span><strong>Number of Formations:</strong> @Model.Participant.NbrFormations</span>
+                    </div>
+
+                    <!-- Edit Button -->
+                    <div class="text-center">
+                        <a href="@Url.Action("Edit", "Profile")" class="btn btn-primary">
+                            <i class="fa fa-edit me-2"></i>Edit Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-lift {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+        }
+</style>

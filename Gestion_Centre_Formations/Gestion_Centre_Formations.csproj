@@ -44,9 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DinkToPdf, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DinkToPdf.1.0.8\lib\netstandard1.6\DinkToPdf.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,9 +52,6 @@
     </Reference>
     <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlRenderer.PdfSharp, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlRenderer.PdfSharp.1.5.0.6\lib\net45\HtmlRenderer.PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -87,6 +81,12 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.dll</HintPath>
     </Reference>
@@ -104,9 +104,6 @@
     </Reference>
     <Reference Include="PdfSharp.WPFonts, Version=6.1.1.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.6.1.1\lib\netstandard2.0\PdfSharp.WPFonts.dll</HintPath>
-    </Reference>
-    <Reference Include="PuppeteerSharp, Version=20.0.5.0, Culture=neutral, PublicKeyToken=db12f80f85d8ba23, processorArchitecture=MSIL">
-      <HintPath>..\packages\PuppeteerSharp.20.0.5\lib\netstandard2.0\PuppeteerSharp.dll</HintPath>
     </Reference>
     <Reference Include="System.AppContext, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.1.0\lib\net463\System.AppContext.dll</HintPath>
@@ -178,6 +175,9 @@
       <HintPath>..\packages\System.Net.Http.4.1.0\lib\net46\System.Net.Http.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Sockets, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Sockets.4.1.0\lib\net46\System.Net.Sockets.dll</HintPath>
@@ -534,6 +534,7 @@
     <Compile Include="Controllers\ActualitesController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\AProposController.cs" />
+    <Compile Include="Controllers\AssistanceAIController.cs" />
     <Compile Include="Controllers\AuthentificationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CertificateController.cs" />
@@ -661,10 +662,6 @@
     <Content Include="Views\Authentification\SignUp.cshtml" />
     <Content Include="Views\Authentification\Login.cshtml" />
     <Content Include="Views\APropos\Index.cshtml" />
-    <Content Include="Views\FormateurProfile\Index.cshtml" />
-    <Content Include="Views\FormateurProfile\Create.cshtml" />
-    <Content Include="Views\FormateurProfile\Edit.cshtml" />
-    <Content Include="Views\FormateurProfile\Details.cshtml" />
     <Content Include="Views\Authentification\AddAdminManually.cshtml" />
     <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Admins\Details.cshtml" />
@@ -709,6 +706,13 @@
     <Content Include="Views\CertifTemplate\Certif.cshtml" />
     <Content Include="Views\Certificate\Certifications.cshtml" />
     <Content Include="Views\Certificate\ViewCertificate.cshtml" />
+    <Content Include="Views\AssistanceAI\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\FormateurProfile\Create.cshtml" />
+    <Content Include="Views\FormateurProfile\Details.cshtml" />
+    <Content Include="Views\FormateurProfile\Edit.cshtml" />
+    <Content Include="Views\FormateurProfile\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -732,7 +736,6 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Formateurs\" />
     <Folder Include="Views\FormationParticipants\" />
-    <Folder Include="Views\Profile\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>

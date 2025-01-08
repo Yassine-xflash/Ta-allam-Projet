@@ -32,10 +32,7 @@
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="course-item bg-light hover-lift">
                     <div class="position-relative overflow-hidden">
-                        @{
-                            var imageName = enrollment.Formation.Titre.Replace(" ", "-").ToLower();
-                        }
-                        <img class="img-fluid" src="~/assets/images/course/@(imageName).jpg" alt="@enrollment.Formation.Titre">
+                        <img class="img-fluid" src="~/assets/images/course/@(enrollment.Formation.Titre).jpg" alt="@enrollment.Formation.Titre">
                     </div>
                     <div class="text-center p-4 pb-0">
                         <h3 class="mb-0">$@enrollment.Formation.Prix</h3>

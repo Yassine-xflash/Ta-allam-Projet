@@ -1,11 +1,16 @@
-﻿<div class="container my-5">
+﻿<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container my-5">
     <div class="row">
         <!-- Profile Card -->
         <div class="col-md-4">
             <div class="card shadow-lg border-0">
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold text-primary">@Model.Formateur.Nom @Model.Formateur.Prenom</h5>
-                    <p class="card-text text-muted">@Model.Formateur.Specialisation</p>
+                    <p class="card-text text-muted">Spécialisation: @Model.Formateur.Specialisation</p>
+                    <p class="card-text text-muted">Email: @Model.Formateur.Email</p>
+                    <p class="card-text text-muted">Téléphone: @Model.Formateur.NumTel</p>
+                    <p class="card-text text-muted">Nombre de formations: @Model.Formateur.NbrFormations</p>
                     <hr />
                     <p class="card-text">
                         <i class="bi bi-person-workspace"></i> Formateur Profil
@@ -32,7 +37,7 @@
 
                                 <div class="mt-auto">
                                     <a href="@Url.Action("Details", "FormateurProfile", new { formationId = formation.FormationID })"
-                                       class="btn btn-primary"
+                                       class="btn btn-primary btn-sm me-2"
                                        onclick="sessionStorage.setItem('FormationId', @formation.FormationID)">
                                         Afficher les détails <i class="bi bi-eye"></i>
                                     </a>
@@ -40,7 +45,7 @@
 
 
 
-                                    <a href="@Url.Action("Edit", new { id = formation.FormationID })" class="btn btn-secondary btn-sm me-2">
+                                    <a href="@Url.Action("Edit","FormateurProfile", new { id = formation.FormationID })" class="btn btn-secondary btn-sm me-2">
                                         <i class="bi bi-pencil"></i> Modifier
                                     </a>
 
@@ -66,4 +71,35 @@
             </div>
         </div>
     </div>
+
+    <canvas id="formationsChart" width="400" height="200"></canvas>
+
+    <script>
+    $(document).ready(function () {
+        $.getJSON('@Url.Action("GetFormationsParticipantsCount")', function (data) {
+            var ctx = document.getElementById('formationsChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(f => f.Titre),
+                    datasets: [{
+                        label: 'Number of Participants',
+                        data: data.map(f => f.ParticipantsCount),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    });
+    </script>
+
 </div>

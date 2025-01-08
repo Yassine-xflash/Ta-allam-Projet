@@ -1,5 +1,4 @@
-﻿using DinkToPdf;
-using Gestion_Centre_Formations.Data;
+﻿using Gestion_Centre_Formations.Data;
 using Gestion_Centre_Formations.Helpers;
 using Gestion_Centre_Formations.Models;
 using System;
@@ -101,6 +100,8 @@ namespace Gestion_Centre_Formations.Controllers
 
             // Log certificate details for debugging purposes
             System.Diagnostics.Debug.WriteLine($"Certificate found: {certificate.CertificateID}");
+            // Pass the hashId to the view using ViewBag
+            ViewBag.HashId = hashId;
 
             return View("ViewCertificate", certificate);
         }

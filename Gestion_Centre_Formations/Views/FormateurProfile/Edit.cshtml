@@ -1,52 +1,135 @@
-﻿@model Gestion_Centre_Formations.Models.Formation
-
+﻿@model Gestion_Centre_Formations.Models.FormationsPage
 @{
     ViewBag.Title = "Modifier une formation";
 }
 
 <div class="container my-5">
-    <h2>Modifier la formation</h2>
-    <hr />
-    @using (Html.BeginForm("Edit", "FormateurProfile", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.FormationID)
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title mb-0">Modifier la formation</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Edit", "FormateurProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*@Html.HiddenFor(model => model.FormationID)*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Titre, "Titre")
-            @Html.TextBoxFor(model => model.Titre, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Titre, "", new { @class = "text-danger" })
+                        <!-- Titre -->
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Titre, "Titre", new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Titre, new { @class = "form-control", placeholder = "Entrez le titre de la formation" })
+                            @Html.ValidationMessageFor(model => model.Titre, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Description, "Description", new { @class = "form-label fw-bold" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4, placeholder = "Décrivez la formation" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <!-- Catégorie -->
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Categorie, "Catégorie", new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Categorie, new { @class = "form-control", placeholder = "Entrez la catégorie de la formation" })
+                            @Html.ValidationMessageFor(model => model.Categorie, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <!-- Durée -->
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Duration, "Durée (en heures)", new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number", min = "1", placeholder = "Entrez la durée en heures" })
+                            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <!-- Prix -->
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Prix, "Prix (€)", new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Prix, new { @class = "form-control", type = "number", step = "0.01", min = "0", placeholder = "Entrez le prix de la formation" })
+                            @Html.ValidationMessageFor(model => model.Prix, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="mb-3">
+                            <label for="ImageFile" class="form-label fw-bold">Image de la formation</label>
+                            <input type="file" name="ImageFile" id="ImageFile" class="form-control" accept="image/*" />
+                            <small class="form-text text-muted">Téléchargez une image pour la formation (format: JPG, PNG).</small>
+                            @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <!-- Hidden Field for FormateurID -->
+                        @Html.HiddenFor(model => model.FormateurID)
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Enregistrer les modifications
+                            </button>
+                            <a href="@Url.Action("Index", "FormateurProfile")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Annuler
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, "Description")
-            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Categorie, "Catégorie")
-            @Html.TextBoxFor(model => model.Categorie, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Categorie, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Duration, "Durée (en heures)")
-            @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number", min = "1" })
-            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Prix, "Prix (€)")
-            @Html.TextBoxFor(model => model.Prix, new { @class = "form-control", type = "number", step = "0.01", min = "0" })
-            @Html.ValidationMessageFor(model => model.Prix, "", new { @class = "text-danger" })
-        </div>
-
-        @* Hidden field to ensure the FormateurID remains the same *@
-        @Html.HiddenFor(model => model.FormateurID)
-
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-        <a href="@Url.Action("Index", "FormateurProfile")" class="btn btn-secondary">Annuler</a>
-    }
+    </div>
 </div>
 
+<!-- Add FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<!-- Optional: Add custom CSS for better spacing and styling -->
+<style>
+    .card {
+        border-radius: 0.5rem;
+        border: none;
+    }
+
+    .card-header {
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .form-label {
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        border-radius: 0.375rem;
+    }
+
+    .btn {
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+
+    .btn-outline-secondary {
+        border-color: #6c757d;
+        color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+    .shadow-lg {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
