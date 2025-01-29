@@ -51,14 +51,10 @@ Client (Browser) → ASP.NET MVC → Entity Framework → SQL Server
 ![Home](./assets/BannerT.jpg)  
 *Home page for Users* 
 
-![Dashboard](./assets/dashboard.png)  
+![Dashboard](./assets/dash.jpg)  
 *Interactive Dashboard for Administrators*  
 
-![Course Management](./assets/course-management.png)  
-*Course Management Interface for Trainers*  
 
-![Certificate](./assets/certificate.png)  
-*Automatically Generated PDF Certificate*  
 
 ---
 
