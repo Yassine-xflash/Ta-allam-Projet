@@ -1,6 +1,6 @@
 # Ta'allam - Training Center Management Web Application
 
-![Ta'allam Banner](https://your-image-link-here.com)
+![Ta'allam Banner](./assets/logo.png)
 
 ## 📌 Introduction
 
@@ -47,6 +47,9 @@ Client (Browser) → ASP.NET MVC → Entity Framework → SQL Server
 ```
 
 ## 📸 Screenshots
+
+![Home](./assets/BannerT.jpg)  
+*Home page for Users* 
 
 ![Dashboard](./assets/dashboard.png)  
 *Interactive Dashboard for Administrators*  
